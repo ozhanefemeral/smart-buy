@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/shared/ui/card";
-import { Button } from "@/components/shared/ui/button";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { House } from "@/components/house";
