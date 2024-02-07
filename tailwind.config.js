@@ -2,15 +2,55 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  darkMode: ["class"],
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
+  prefix: "",
   future: {
     hoverOnlyWhenSupported: true,
   },
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
       },
       animation: {
         // Fade up and down
@@ -20,49 +60,50 @@ module.exports = {
         "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
       },
-      keyframes: {
-        // Fade up and down
-        "fade-up": {
-          "0%": {
-            opacity: 0,
-            transform: "translateY(10px)",
-          },
-          "80%": {
-            opacity: 0.6,
-          },
-          "100%": {
-            opacity: 1,
-            transform: "translateY(0px)",
-          },
+    },
+    keyframes: {
+      // Fade up and down
+      "fade-up": {
+        "0%": {
+          opacity: 0,
+          transform: "translateY(10px)",
         },
-        "fade-down": {
-          "0%": {
-            opacity: 0,
-            transform: "translateY(-10px)",
-          },
-          "80%": {
-            opacity: 0.6,
-          },
-          "100%": {
-            opacity: 1,
-            transform: "translateY(0px)",
-          },
+        "80%": {
+          opacity: 0.6,
         },
-        // Tooltip
-        "slide-up-fade": {
-          "0%": { opacity: 0, transform: "translateY(6px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0px)",
         },
-        "slide-down-fade": {
-          "0%": { opacity: 0, transform: "translateY(-6px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
+      },
+      "fade-down": {
+        "0%": {
+          opacity: 0,
+          transform: "translateY(-10px)",
         },
+        "80%": {
+          opacity: 0.6,
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0px)",
+        },
+      },
+      // Tooltip
+      "slide-up-fade": {
+        "0%": { opacity: 0, transform: "translateY(6px)" },
+        "100%": { opacity: 1, transform: "translateY(0)" },
+      },
+      "slide-down-fade": {
+        "0%": { opacity: 0, transform: "translateY(-6px)" },
+        "100%": { opacity: 1, transform: "translateY(0)" },
       },
     },
   },
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("tailwindcss-animate"),
     plugin(({ addVariant }) => {
       addVariant("radix-side-top", '&[data-side="top"]');
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
