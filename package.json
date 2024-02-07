@@ -8,7 +8,9 @@
     "format:write": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\"",
     "format": "prettier \"**/*.{css,js,json,jsx,ts,tsx}\"",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -44,16 +46,26 @@
     "vaul": "^0.6.8"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.13",
+    "@storybook/addon-interactions": "^7.6.13",
+    "@storybook/addon-links": "^7.6.13",
+    "@storybook/addon-onboarding": "1.0.11",
+    "@storybook/blocks": "^7.6.13",
+    "@storybook/nextjs": "^7.6.13",
+    "@storybook/react": "^7.6.13",
+    "@storybook/test": "^7.6.13",
     "@tailwindcss/forms": "^0.5.6",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.10",
     "@types/ms": "^0.7.32",
     "autoprefixer": "^10.4.16",
     "concurrently": "^7.6.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "prisma": "^5.9.1",
+    "storybook": "^7.6.13",
     "tailwindcss": "^3.3.3"
   }
 }
