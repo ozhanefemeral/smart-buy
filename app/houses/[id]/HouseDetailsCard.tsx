@@ -11,7 +11,7 @@ const DetailInfoRow = ({
   if (label === "description") return null;
   return (
     <div className="flex items-center space-x-2">
-      <div className="w-1/2 text-gray-500">{label}</div>
+      <div className="w-1/2 capitalize text-gray-500">{label}</div>
       <div className="">{value}</div>
     </div>
   );
