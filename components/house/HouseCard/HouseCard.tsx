@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { House } from "@/components/house";
-import PlaceholderImage from "@/public/placeholder.svg";
 
 export function HouseCard({ house }: { house: House }) {
   const route = useRouter();
@@ -25,7 +24,7 @@ export function HouseCard({ house }: { house: House }) {
     <Card className="flex w-[350px] flex-col">
       <CardHeader>
         <Image
-          src={PlaceholderImage}
+          src="placeholder.svg"
           alt="House Image"
           width={350}
           height={200}

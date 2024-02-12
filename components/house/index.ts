@@ -9,3 +9,18 @@ export type House = {
   price: number;
   available: HouseAvailability;
 };
+
+export type HouseDetails = {
+  description: string;
+  area: number;
+  bedrooms: number;
+  bathrooms: number;
+  parking: boolean;
+  balconies: number;
+  floor: number;
+  year: number;
+};
+
+export type HouseWithDetails = House & {
+  details: HouseDetails;
+};
