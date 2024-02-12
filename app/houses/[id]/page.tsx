@@ -3,17 +3,14 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 import placeholder from "../../../public/placeholder.svg";
 import { HouseDetailsCard } from "./HouseDetailsCard";
-import { setTimeout } from "timers/promises";
 import { LoginCTACard } from "@/components/cta/login";
 
-export default async function HouseDetails({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { id } = params;
+type Props = {
+  id: string;
+};
+
+export default async function HouseDetails({ id }: Props) {
   const house = await getHouseById(id);
-  await setTimeout(1000);
   const { details } = house;
 
   return (
