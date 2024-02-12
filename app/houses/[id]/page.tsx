@@ -3,10 +3,11 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 import placeholder from "../../../public/placeholder.svg";
 import { HouseDetailsCard } from "./HouseDetailsCard";
-import { LoginCTACard } from "@/components/cta/login";
+import { House } from "@/components/house";
+import { HouseOwnerInfo } from "@/components/house-owner/HouseOwnerInfo";
 
 type Props = {
-  id: string;
+  id: House["id"];
 };
 
 export default async function HouseDetails({ id }: Props) {
@@ -16,8 +17,7 @@ export default async function HouseDetails({ id }: Props) {
   return (
     <Suspense>
       <div className="flex flex-col items-stretch space-y-4 lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0">
-        <div className="flex flex-col space-y-4 xl:w-3/4">
-          <LoginCTACard />
+        <div className="flex flex-col space-y-4 xl:w-2/3">
           <div className=" rounded-lg border p-4">
             <div className="flex max-h-[500px] flex-col border-b pb-4 lg:flex-row lg:space-x-4">
               <div className="overflow-hidden rounded-lg lg:w-4/5">
@@ -49,7 +49,8 @@ export default async function HouseDetails({ id }: Props) {
             </div>
           </div>
         </div>
-        <div className="flex h-fit flex-col space-y-4 xl:w-1/4">
+        <div className="flex h-fit flex-col space-y-4 xl:w-1/3">
+          <HouseOwnerInfo id={house.owner} />
           <HouseDetailsCard details={details} />
         </div>
       </div>

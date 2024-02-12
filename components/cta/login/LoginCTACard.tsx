@@ -11,24 +11,24 @@ export async function LoginCTACard() {
   if (isLogged) return null;
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center space-y-4 rounded-lg border p-4 lg:flex-row lg:justify-start lg:space-x-4 lg:space-y-0">
+    <div className="rounded-lg bg-sky-100 p-4">
+      <div className="flex flex-row items-start space-x-4">
         <Image
           alt="house search"
-          width={200}
+          width={100}
           height={200}
           src="/select-house-animate.svg"
         />
-        <div className="flex h-full flex-col items-start justify-between">
-          <div>
-            <h3 className="text-2xl font-semibold">Login to see more</h3>
-            <p className="pb-4 text-gray-500">
-              See more details about this house and contact the owner.
-            </p>
-          </div>
-          <SignInButton />
+        <div>
+          <div className="font-semibold">Signin to see more</div>
+          <p className="text-gray-500">
+            See more details about this house and contact the owner.
+          </p>
         </div>
       </div>
-    </>
+      <div className="flex justify-end">
+        <SignInButton />
+      </div>
+    </div>
   );
 }

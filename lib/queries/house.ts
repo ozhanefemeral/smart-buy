@@ -1,7 +1,6 @@
-import { HouseWithDetails } from "@/components/house";
+import { House, HouseWithDetails } from "@/components/house";
 
-export const getHouseById = async (id: string): Promise<HouseWithDetails> => {
-  setTimeout(() => {}, 1000);
+export const getHouseById = async (id: House["id"]) => {
   const house: HouseWithDetails = {
     id: 1,
     title: "Beautiful house",
@@ -19,6 +18,7 @@ export const getHouseById = async (id: string): Promise<HouseWithDetails> => {
       floor: 3,
       year: 2020,
     },
+    owner: 1,
   };
 
   return house;

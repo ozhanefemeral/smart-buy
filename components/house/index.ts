@@ -1,3 +1,5 @@
+import { HouseOwner } from "../house-owner";
+
 // TODO: Change it to type from Prisma
 type HouseAvailability = "available" | "unavailable" | "soon";
 
@@ -23,4 +25,5 @@ export type HouseDetails = {
 
 export type HouseWithDetails = House & {
   details: HouseDetails;
+  owner: HouseOwner["id"];
 };
