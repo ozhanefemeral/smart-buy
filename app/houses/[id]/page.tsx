@@ -5,6 +5,7 @@ import placeholder from "../../../public/placeholder.svg";
 import { HouseDetailsCard } from "./HouseDetailsCard";
 import { House } from "@/components/house";
 import { HouseOwnerInfo } from "@/components/house-owner/HouseOwnerInfo";
+import ShareHouseCard from "./ShareHouse";
 
 type Props = {
   id: House["id"];
@@ -51,6 +52,7 @@ export default async function HouseDetails({ id }: Props) {
         </div>
         <div className="flex h-fit flex-col space-y-4 xl:w-1/3">
           <HouseOwnerInfo id={house.owner} />
+          <ShareHouseCard />
           <HouseDetailsCard details={details} />
         </div>
       </div>
