@@ -2,7 +2,7 @@ import { House, HouseWithDetails } from "@/components/house";
 
 export const getHouseById = async (id: House["id"]) => {
   const house: HouseWithDetails = {
-    id: 1,
+    id: "1",
     title: "Beautiful house",
     city: "New York",
     district: "Manhattan",

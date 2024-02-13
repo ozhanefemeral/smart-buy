@@ -6,14 +6,18 @@ import { HouseDetailsCard } from "./HouseDetailsCard";
 import { House } from "@/components/house";
 import { HouseOwnerInfo } from "@/components/house-owner/HouseOwnerInfo";
 import ShareHouseCard from "./ShareHouse";
+import { incrementViewCount } from "@/lib/dynamodb";
+import { HouseStats } from "@/components/house/HouseStats/HouseStats";
 
-type Props = {
+type Params = {
   id: House["id"];
 };
 
-export default async function HouseDetails({ id }: Props) {
+export default async function HouseDetails({ params }: { params: Params }) {
+  const { id } = params;
   const house = await getHouseById(id);
   const { details } = house;
+  await incrementViewCount(id);
 
   return (
     <Suspense>
@@ -53,6 +57,7 @@ export default async function HouseDetails({ id }: Props) {
         <div className="flex h-fit flex-col space-y-4 xl:w-1/3">
           <HouseOwnerInfo id={house.owner} />
           <ShareHouseCard />
+          <HouseStats houseId={id} />
           <HouseDetailsCard details={details} />
         </div>
       </div>

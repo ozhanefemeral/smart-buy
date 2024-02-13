@@ -4,7 +4,7 @@ import { HouseOwner } from "../house-owner";
 type HouseAvailability = "available" | "unavailable" | "soon";
 
 export type House = {
-  id: number;
+  id: string;
   title: string;
   city: string;
   district: string;
