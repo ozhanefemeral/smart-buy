@@ -7,8 +7,9 @@ export const getUserById = async (id: User["id"], session: Session | null) => {
     name: "Özhan Efe Meral",
     phone: "5414636693",
     email: "me@ozhanefemeral.com",
-    image: "/avatar.png",
+    avatar: "/avatar.png",
     createdAt: new Date("2023-01-17"),
+    updatedAt: new Date("2023-01-17"),
     lastOnline: new Date(),
   };
 
