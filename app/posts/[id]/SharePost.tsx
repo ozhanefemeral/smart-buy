@@ -7,7 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function ShareHouseCard() {
+export default function SharePostCard() {
   const pathname = usePathname();
   const { toast } = useToast();
 

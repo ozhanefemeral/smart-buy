@@ -1,2 +1,2 @@
 export * from "./dynamodb";
-export * from "./house-stats";
+export * from "./post-stats";

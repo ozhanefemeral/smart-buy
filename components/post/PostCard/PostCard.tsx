@@ -11,13 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { House } from "@/components/house";
+import { Post } from "@prisma/client";
 
-export function HouseCard({ house }: { house: House }) {
+export function PostCard({ post }: { post: Post }) {
   const route = useRouter();
 
-  const goToHouse = () => {
-    route.push(`/houses/${house.id}`);
+  const goToPost = () => {
+    route.push(`/post/${post.id}`);
   };
 
   return (
@@ -25,17 +25,17 @@ export function HouseCard({ house }: { house: House }) {
       <CardHeader>
         <Image
           src="placeholder.svg"
-          alt="House Image"
+          alt={post.title}
           width={350}
           height={200}
           className="rounded-md"
         />
-        <CardTitle className="pt-2">{house.title}</CardTitle>
-        <CardDescription>{house.city + ", " + house.district}</CardDescription>
+        <CardTitle className="pt-2">{post.title}</CardTitle>
+        <CardDescription>{post.description}</CardDescription>
       </CardHeader>
       <CardFooter className="mt-auto flex items-end justify-between space-x-4">
-        <p>{house.price}</p>
-        <Button onClick={goToHouse}>See Details</Button>
+        <p>{post.price}</p>
+        <Button onClick={goToPost}>See Details</Button>
       </CardFooter>
     </Card>
   );

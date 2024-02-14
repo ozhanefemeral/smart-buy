@@ -12,23 +12,21 @@ export const dynamoDBClient = new DynamoDBClient({
   region: process.env.AWS_REGION,
 });
 
-async function createHouseStatsTableIfNotExists() {
+async function createPostStatsTableIfNotExists() {
   try {
     await dynamoDBClient.send(
       new GetItemCommand({
-        TableName: "HouseStats",
-        Key: marshall({ houseId: "fakeId" }),
+        TableName: "PostStats",
+        Key: marshall({ postId: "fakeId" }),
       }),
     );
   } catch (error: any) {
     if (error.name === "ResourceNotFoundException") {
       // Table doesn't exist, create it
       const params: CreateTableInput = {
-        TableName: "HouseStats",
-        KeySchema: [{ AttributeName: "houseId", KeyType: "HASH" }],
-        AttributeDefinitions: [
-          { AttributeName: "houseId", AttributeType: "S" },
-        ],
+        TableName: "PostStats",
+        KeySchema: [{ AttributeName: "postId", KeyType: "HASH" }],
+        AttributeDefinitions: [{ AttributeName: "postId", AttributeType: "S" }],
         BillingMode: "PAY_PER_REQUEST",
       };
 
@@ -40,7 +38,7 @@ async function createHouseStatsTableIfNotExists() {
   }
 }
 
-createHouseStatsTableIfNotExists();
+createPostStatsTableIfNotExists();
 
 // Function to get an item from DynamoDB
 export async function getItem(tableName: string, key: any) {

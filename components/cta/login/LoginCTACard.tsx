@@ -22,7 +22,7 @@ export async function LoginCTACard() {
         <div>
           <div className="font-semibold">Signin to see more</div>
           <p className="text-gray-500">
-            See more details about this house and contact the owner.
+            See more details about this post and contact the owner.
           </p>
         </div>
       </div>

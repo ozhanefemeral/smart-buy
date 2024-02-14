@@ -1,21 +1,20 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { LoginCTACard } from "@/components/cta/login";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getHouseOwnerById } from "@/lib/queries/house-owner";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { PhoneButton } from "./PhoneButton";
+import { User } from "@prisma/client";
+import { getUserById } from "@/lib/queries/user";
 
 type Props = {
-  id: number;
+  id: User["id"];
 };
 
 const formatDate = (dateString: string) => {
@@ -42,38 +41,41 @@ const formatDate = (dateString: string) => {
   return `${monthNames[monthIndex]} ${day}, ${year}`;
 };
 
-export const HouseOwnerInfo: React.FC<Props> = async ({ id }) => {
+export const PostOwnerInfo: React.FC<Props> = async ({ id }) => {
   const session = await getServerSession(authOptions);
-  const houseOwner = await getHouseOwnerById(1, session);
+  const postOwner = await getUserById(id, session);
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-start space-x-4">
         <Image
-          src={houseOwner.avatar}
-          alt="House Owner Avatar"
+          src={postOwner.avatar || "/avatar-placeholder.svg"}
+          alt="Post Owner Avatar"
           width={80}
           height={60}
         />
         <div className="flex w-full flex-col overflow-hidden">
           <CardTitle>
             <div className="scroll-m-20 text-xl font-semibold">
-              {houseOwner.name}
+              {postOwner.name}
             </div>
           </CardTitle>
           <CardDescription>
             Member since{" "}
             <span className="font-bold">
-              {formatDate(houseOwner.memberSince)}
+              {formatDate(postOwner.createdAt.toDateString())}
             </span>
             <br />
-            Last online {formatDate(houseOwner.lastOnline)}
+            Last online{" "}
+            {formatDate(postOwner.lastOnline?.toDateString() || "Unknown")}
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col space-y-4">
         {!session?.user && <LoginCTACard />}
-        <PhoneButton phone={houseOwner.phone} isLogged={!!session?.user} />
+        {postOwner.phone && (
+          <PhoneButton phone={postOwner.phone} isLogged={!!session?.user} />
+        )}
       </CardContent>
     </Card>
   );

@@ -6,14 +6,14 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dynamoDBClient } from "@/lib/dynamodb";
-import { House } from "@/components/house";
+import { Post } from "@/components/post";
 
-const TableName = "HouseStats";
+const TableName = "PostStats";
 
-export async function incrementViewCount(houseId: House["id"]) {
+export async function incrementViewCount(postId: Post["id"]) {
   const params = {
     TableName,
-    Key: marshall({ houseId }),
+    Key: marshall({ postId }),
     UpdateExpression: "ADD #viewCount :increment",
     ExpressionAttributeNames: {
       "#viewCount": "viewCount",
@@ -30,18 +30,18 @@ export async function incrementViewCount(houseId: House["id"]) {
     return unmarshall(data.Attributes ?? {});
   } catch (error) {
     console.error(
-      `Error incrementing view count for house ${houseId} in DynamoDB:`,
+      `Error incrementing view count for post ${postId} in DynamoDB:`,
       error,
     );
     throw error;
   }
 }
 
-export async function addHouse(houseId: House["id"]) {
+export async function addPost(postId: Post["id"]) {
   const params = {
     TableName,
     Item: marshall({
-      houseId,
+      postId,
       viewCount: 0,
       favouriteCount: 0,
     }),
@@ -51,15 +51,15 @@ export async function addHouse(houseId: House["id"]) {
     const command = new PutItemCommand(params);
     await dynamoDBClient.send(command);
   } catch (error) {
-    console.error(`Error adding house ${houseId} to DynamoDB:`, error);
+    console.error(`Error adding post ${postId} to DynamoDB:`, error);
     throw error;
   }
 }
 
-export async function getHoueStats(houseId: House["id"]) {
+export async function getHoueStats(postId: Post["id"]) {
   const params = {
     TableName,
-    Key: marshall({ houseId }),
+    Key: marshall({ postId }),
   };
 
   try {
@@ -68,7 +68,7 @@ export async function getHoueStats(houseId: House["id"]) {
     return unmarshall(data.Item ?? {});
   } catch (error) {
     console.error(
-      `Error getting house stats for house ${houseId} from DynamoDB:`,
+      `Error getting post stats for post ${postId} from DynamoDB:`,
       error,
     );
     throw error;

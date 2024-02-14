@@ -1,9 +1,9 @@
-import { getHouseById } from "@/lib/queries/house";
+import { getPostById } from "@/lib/queries/post";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const id = params.id;
 
@@ -11,7 +11,7 @@ export async function GET(
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
   }
 
-  const house = await getHouseById(id);
+  const house = await getPostById(id);
 
   return NextResponse.json(house);
 }
