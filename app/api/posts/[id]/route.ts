@@ -1,5 +1,7 @@
 import { getPostById } from "@/lib/queries/post";
+import { handleError } from "@/lib/errors";
 import { NextRequest, NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 export async function GET(
   req: NextRequest,
@@ -8,10 +10,13 @@ export async function GET(
   const id = params.id;
 
   if (!id) {
-    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+    return handleError("Invalid ID", 400);
   }
 
-  const house = await getPostById(id);
-
-  return NextResponse.json(house);
+  try {
+    const post = await getPostById(id);
+    return NextResponse.json(post);
+  } catch (error) {
+    redirect("/404");
+  }
 }

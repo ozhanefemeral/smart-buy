@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { Post } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export const getPostById = async (id: Post["id"]) => {
   const post = await prisma.post.findUnique({
@@ -9,7 +10,7 @@ export const getPostById = async (id: Post["id"]) => {
   });
 
   if (!post) {
-    throw new Error(`Post with id ${id} not found`);
+    redirect("/404");
   }
 
   return post;
