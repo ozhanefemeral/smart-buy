@@ -9,6 +9,15 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      profile(profile) {
+        return {
+          id: profile.sub as string,
+          name: profile.name as string,
+          email: profile.email as string,
+          phone: profile.phone as string,
+          image: profile.picture as string,
+        };
+      },
     }),
   ],
 };
