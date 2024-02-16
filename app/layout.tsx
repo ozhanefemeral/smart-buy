@@ -4,6 +4,7 @@ import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav";
 import { Suspense } from "react";
+import { Providers } from "@/components/layout/providers";
 
 export const metadata = {
   title: "Precedent - Building blocks for your Next.js project",
@@ -24,9 +25,11 @@ export default async function RootLayout({
         <Suspense fallback="...">
           <Nav />
         </Suspense>
-        <main className="flex min-h-screen w-full flex-col py-8 md:px-8">
-          {children}
-        </main>
+        <Providers>
+          <main className="flex min-h-screen w-full flex-col py-8 md:px-8">
+            {children}
+          </main>
+        </Providers>
         <Analytics />
       </body>
     </html>
