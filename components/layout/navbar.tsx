@@ -1,13 +1,13 @@
 "use client";
 
+import { CreatePostButton } from "@/components/cta/create-post/";
+import useScroll from "@/lib/hooks/use-scroll";
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import useScroll from "@/lib/hooks/use-scroll";
+import { SignInButton } from "../shared/SignInButton";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
-import { Session } from "next-auth";
-import { Button } from "../ui/button";
-import { SignInButton } from "../shared/SignInButton";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
@@ -34,8 +34,9 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             <p>Precedent</p>
           </Link>
-          <div>
-            {session ? <UserDropdown session={session} /> : <SignInButton />}
+          <div className="flex items-center justify-end space-x-4">
+            <CreatePostButton />
+            {session && <UserDropdown session={session} />}
           </div>
         </div>
       </div>

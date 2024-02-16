@@ -21,17 +21,17 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable)}>
-        <Suspense fallback="...">
-          <Nav />
-        </Suspense>
-        <Providers>
+      <Providers>
+        <body className={cx(sfPro.variable, inter.variable)}>
+          <Suspense fallback="...">
+            <Nav />
+          </Suspense>
           <main className="flex min-h-screen w-full flex-col py-8 md:px-8">
             {children}
           </main>
-        </Providers>
-        <Analytics />
-      </body>
+          <Analytics />
+        </body>
+      </Providers>
     </html>
   );
 }
