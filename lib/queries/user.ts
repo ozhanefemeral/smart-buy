@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { Session } from "next-auth";
+import prisma from "@/lib/prisma";
 
 export const getUserById = async (id: User["id"], session: Session | null) => {
   let postOwner: User = {
@@ -22,4 +23,14 @@ export const getUserById = async (id: User["id"], session: Session | null) => {
   }
 
   return postOwner;
+};
+
+export const getUserIdByEmail = async (email: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  return user?.id;
 };
