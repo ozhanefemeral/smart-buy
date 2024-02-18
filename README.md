@@ -1,97 +1,59 @@
-<a href="https://precedent.dev">
-  <img alt="Precedent – Building blocks for your Next project" src="https://precedent.dev/opengraph-image">
-  <h1 align="center">Precedent</h1>
-</a>
+# Smart Buy - Online Marketplace
 
-<p align="center">
-  Building blocks for your Next project
-</p>
+Smart Buy is an online marketplace built with Next.js, incorporating various technologies to provide a seamless shopping experience. This README serves as a guide to understand the project's tech stack, naming conventions, file structure, and best practices.
 
-<p align="center">
-  <a href="https://twitter.com/steventey">
-    <img src="https://img.shields.io/twitter/follow/steventey?style=flat&label=steventey&logo=twitter&color=0bf&logoColor=fff" alt="Steven Tey Twitter follower count" />
-  </a>
-  <a href="https://github.com/steven-tey/precedent">
-    <img src="https://img.shields.io/github/stars/steven-tey/precedent?label=steven-tey%2Fprecedent" alt="Precedent repo star count" />
-  </a>
-</p>
+## Tech Stack
 
-<p align="center">
-  <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#one-click-deploy"><strong>One-click Deploy</strong></a> ·
-  <a href="#tech-stack--features"><strong>Tech Stack + Features</strong></a> ·
-  <a href="#author"><strong>Author</strong></a>
-</p>
-<br/>
+- **Next.js 13 with TypeScript**: Next.js provides server-side rendering and a great developer experience, while TypeScript adds static typing for improved code quality.
+- **Prisma ORM, PostgreSQL with Supabase Database**: Prisma is used as the ORM (Object-Relational Mapping) tool for database interactions, with PostgreSQL as the relational database managed by Supabase.
+- **Storybook**: Storybook allows for isolated development of UI components, aiding in building and testing reusable UI elements.
+- **Tailwind CSS**: Tailwind CSS is used for styling, providing a utility-first approach for rapid UI development.
+- **Next-Auth with Google OAuth**: Next-Auth handles authentication, while Google OAuth integration allows users to sign in securely using their Google accounts.
+- **AWS S3 and DynamoDB**: AWS S3 is utilized for file storage, while DynamoDB serves as the NoSQL database for scalable and flexible data storage.
 
-## Introduction
+## Naming Conventions
 
-Precedent is an opinionated collection of components, hooks, and utilities for your Next.js project.
+- **File Names**: File names follow a descriptive convention, utilizing kebab-case for readability (`file-name.tsx`).
+- **Component Naming**: Components are organized under specific categories (`home`, `layout`, `post`, etc.), with each component having a clear and concise name (`ComponentName.tsx`).
+- **Directory Structure**: Directories are named according to their purpose or category (`components`, `lib`, etc.), ensuring logical organization and easy navigation.
 
-## One-click Deploy
+## Best Practices
 
-You can deploy this template to Vercel with the button below:
+- **Exporting Components**: Components are exported using `index.ts` files to provide a single entry point for importing. For example:
+  ```typescript
+  // components/post/index.ts
+  export type { Post } from "@prisma/client";
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fprecedent&project-name=precedent&repository-name=precedent&demo-title=Precedent&demo-description=An%20opinionated%20collection%20of%20components%2C%20hooks%2C%20and%20utilities%20for%20your%20Next%20project.&demo-url=https%3A%2F%2Fprecedent.dev&demo-image=https%3A%2F%2Fprecedent.dev%2Fopengraph-image&env=GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,NEXTAUTH_SECRET&envDescription=How%20to%20get%20these%20env%20variables%3A&envLink=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fprecedent%2Fblob%2Fmain%2F.env.example&stores=%5B%7B"type"%3A"postgres"%7D%5D)
+  export * from "./PostCard";
+  export * from "./PostCarousel";
+  export * from "./PostStats";
 
-You can also clone & create this repo locally with the following command:
+- **Import Aliases**: Import aliases are used to simplify imports and improve readability. For example:
+  ```typescript
+  // Before
+  import { authOptions } from "../api/auth/[...nextauth]/route";
+
+  // After
+  import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+  ```
+
+## Usage
+
+To run the project locally, follow these steps:
+
+1. Clone the repository
+2. Install dependencies: `npm install` or `yarn install` or `pnpm install`
+3. Create a `.env` file in the root directory of the project.
+4. Refer to the provided `.env.example` file for the necessary environment variables and their format.
+
+Once you've set up the environment variables in your `.env` file, you can start the development server:
 
 ```bash
-npx create-next-app precedent --example "https://github.com/steven-tey/precedent"
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-Then, install the dependencies with your package manager of choice:
-
-```bash
-npm i
-yarn
-pnpm i
-```
-
-## Tech Stack + Features
-
-https://user-images.githubusercontent.com/28986134/212368288-12f41e37-aa8c-4e0a-a542-cf6d23410a65.mp4
-
-### Frameworks
-
-- [Next.js](https://nextjs.org/) – React framework for building performant apps with the best developer experience
-- [Auth.js](https://authjs.dev/) – Handle user authentication with ease with providers like Google, Twitter, GitHub, etc.
-- [Prisma](https://www.prisma.io/) – Typescript-first ORM for Node.js
-
-### Platforms
-
-- [Vercel](https://vercel.com/) – Easily preview & deploy changes with git
-- [Vercel Postgres](https://vercel.com/postgres) – Serverless Postgres at the Edge
-
-### UI
-
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
-- [Radix](https://www.radix-ui.com/) – Primitives like modal, popover, etc. to build a stellar user experience
-- [Framer Motion](https://framer.com/motion) – Motion library for React to animate components with ease
-- [Lucide](https://lucide.dev/) – Beautifully simple, pixel-perfect icons
-- [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) – Optimize custom fonts and remove external network requests for improved performance
-- [`ImageResponse`](https://nextjs.org/docs/app/api-reference/functions/image-response) – Generate dynamic Open Graph images at the edge
-
-### Hooks and Utilities
-
-- `useIntersectionObserver` –  React hook to observe when an element enters or leaves the viewport
-- `useLocalStorage` – Persist data in the browser's local storage
-- `useScroll` – React hook to observe scroll position ([example](https://github.com/steven-tey/precedent/blob/main/components/layout/navbar.tsx#L12))
-- `nFormatter` – Format numbers with suffixes like `1.2k` or `1.2M`
-- `capitalize` – Capitalize the first letter of a string
-- `truncate` – Truncate a string to a specified length
-- [`use-debounce`](https://www.npmjs.com/package/use-debounce) – Debounce a function call / state update
-
-### Code Quality
-
-- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end typesafety
-- [Prettier](https://prettier.io/) – Opinionated code formatter for consistent code style
-- [ESLint](https://eslint.org/) – Pluggable linter for Next.js and TypeScript
-
-### Miscellaneous
-
-- [Vercel Analytics](https://vercel.com/analytics) – Track unique visitors, pageviews, and more in a privacy-friendly way
-
-## Author
-
-- Steven Tey ([@steventey](https://twitter.com/steventey))
+This will start the development server at `http://localhost:3000`.
