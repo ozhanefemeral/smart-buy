@@ -45,11 +45,15 @@ export const PostOwnerInfo: React.FC<Props> = async ({ id }) => {
   const session = await getServerSession(authOptions);
   const postOwner = await getUserById(id, session);
 
+  if (!postOwner) {
+    return null;
+  }
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start space-x-4">
         <Image
-          src={postOwner.avatar || "/avatar-placeholder.svg"}
+          src={postOwner.image || "/avatar.png"}
           alt="Post Owner Avatar"
           width={80}
           height={60}
@@ -66,8 +70,6 @@ export const PostOwnerInfo: React.FC<Props> = async ({ id }) => {
               {formatDate(postOwner.createdAt.toDateString())}
             </span>
             <br />
-            Last online{" "}
-            {formatDate(postOwner.lastOnline?.toDateString() || "Unknown")}
           </CardDescription>
         </div>
       </CardHeader>

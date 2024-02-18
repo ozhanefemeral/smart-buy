@@ -12,6 +12,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.511.0",
     "@aws-sdk/lib-dynamodb": "^3.511.0",
@@ -25,7 +28,6 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@types/node": "18.11.18",
     "@types/react": "18.2.24",
     "@types/react-dom": "18.2.8",
     "@vercel/analytics": "^0.1.11",
@@ -47,12 +49,12 @@
     "swiper": "^11.0.6",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.2.2",
     "use-debounce": "^9.0.4",
     "vaul": "^0.6.8",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@storybook/addon-essentials": "^7.6.13",
     "@storybook/addon-interactions": "^7.6.13",
     "@storybook/addon-links": "^7.6.13",
@@ -65,6 +67,7 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.10",
     "@types/ms": "^0.7.32",
+    "@types/node": "18.11.18",
     "autoprefixer": "^10.4.16",
     "concurrently": "^7.6.0",
     "eslint-plugin-storybook": "^0.6.15",
@@ -73,6 +76,8 @@
     "prettier-plugin-tailwindcss": "^0.2.8",
     "prisma": "^5.9.1",
     "storybook": "^7.6.13",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "5.2.2"
   }
 }

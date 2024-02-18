@@ -3,16 +3,15 @@ import { Session } from "next-auth";
 import prisma from "@/lib/prisma";
 
 export const getUserById = async (id: User["id"], session: Session | null) => {
-  let postOwner: User = {
-    id: id, // "1" is a placeholder for the actual user id
-    name: "Özhan Efe Meral",
-    phone: "5414636693",
-    email: "me@ozhanefemeral.com",
-    avatar: "/avatar.png",
-    createdAt: new Date("2023-01-17"),
-    updatedAt: new Date("2023-01-17"),
-    lastOnline: new Date(),
-  };
+  let postOwner = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!postOwner) {
+    return null;
+  }
 
   if (!session) {
     postOwner = {

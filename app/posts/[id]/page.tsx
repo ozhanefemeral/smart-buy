@@ -24,7 +24,16 @@ export default async function PostPage({ params }: { params: Params }) {
           <div className=" rounded-lg border p-4">
             <div className="flex max-h-[500px] flex-col border-b pb-4 lg:flex-row lg:space-x-4">
               <div className="overflow-hidden rounded-lg lg:w-4/5">
-                <Image src={placeholder} alt={post.title} className="w-full" />
+                <Image
+                  src={post.images[0] || placeholder}
+                  alt={post.title}
+                  // below is the fix for having a 100% width image
+                  // discussed on: https://github.com/vercel/next.js/discussions/18474#discussioncomment-5501724
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "100%", height: "auto" }}
+                />
               </div>
             </div>
             <div className="flex flex-col space-y-2 pt-4">
