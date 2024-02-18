@@ -1,5 +1,5 @@
 import { Post, PostCard } from "@/components/post/";
-import { CarouselBase } from "../../shared/carousels/CarouselBase";
+import { CarouselBase } from "@/components/shared/carousels/CarouselBase";
 
 interface PostCarouselProps {
   endpoint: string;

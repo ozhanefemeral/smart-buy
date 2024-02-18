@@ -5,12 +5,11 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { SignInButton } from "../shared/SignInButton";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 
 export default function NavBar({ session }: { session: Session | null }) {
-  const { SignInModal, setShowSignInModal } = useSignInModal();
+  const { SignInModal } = useSignInModal();
   const scrolled = useScroll(50);
 
   return (

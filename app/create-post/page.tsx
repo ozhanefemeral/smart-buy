@@ -14,7 +14,7 @@ import loginSvg from "@/public/login.svg";
 import webShoppingSvg from "@/public/web-shopping.svg";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { createPostAction } from "./actions";
 
 export default async function CreatePost() {
