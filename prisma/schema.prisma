@@ -69,7 +69,7 @@ model Post {
   title       String
   price       Int
   description String?
-  thumbnail   String
+  thumbnail   String?
   images      String[]
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     String

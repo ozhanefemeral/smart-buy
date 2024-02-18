@@ -10,13 +10,14 @@ import {
 import Image from "next/image";
 import { Post } from "@prisma/client";
 import Link from "next/link";
+import placeHolderSVG from "@/public/placeholder.svg";
 
 export function PostCard({ post }: { post: Post }) {
   return (
     <Card className="flex w-[300px] flex-col">
       <CardHeader>
         <Image
-          src={post.thumbnail}
+          src={post.thumbnail || placeHolderSVG}
           alt={post.title}
           width={350}
           height={200}
