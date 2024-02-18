@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 
 import {
@@ -8,34 +7,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Post } from "@prisma/client";
+import Link from "next/link";
 
 export function PostCard({ post }: { post: Post }) {
-  const route = useRouter();
-
-  const goToPost = () => {
-    route.push(`/post/${post.id}`);
-  };
-
   return (
-    <Card className="flex w-[350px] flex-col">
+    <Card className="flex w-[300px] flex-col">
       <CardHeader>
         <Image
-          src="placeholder.svg"
+          src={post.thumbnail}
           alt={post.title}
           width={350}
           height={200}
-          className="rounded-md"
+          className="aspect-3/2 rounded-md object-cover"
         />
         <CardTitle className="pt-2">{post.title}</CardTitle>
         <CardDescription>{post.description}</CardDescription>
       </CardHeader>
       <CardFooter className="mt-auto flex items-end justify-between space-x-4">
         <p>{post.price}</p>
-        <Button onClick={goToPost}>See Details</Button>
+        <Link
+          className="font-semibold hover:underline"
+          href={`/posts/${post.id}`}
+        >
+          Details
+        </Link>
       </CardFooter>
     </Card>
   );

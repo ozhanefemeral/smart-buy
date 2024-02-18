@@ -7,6 +7,8 @@ import { Post } from "@prisma/client";
 const availableHouse: Post = {
   id: "123-asd",
   title: "House 1",
+  thumbnail:
+    "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-home-thumbnail.webp",
   description: "A beautiful house",
   price: 100000,
   createdAt: new Date(),

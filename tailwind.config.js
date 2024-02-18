@@ -60,6 +60,9 @@ module.exports = {
         "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
       },
+      aspectRatio: {
+        "3/2": "3 / 2",
+      },
     },
     keyframes: {
       // Fade up and down

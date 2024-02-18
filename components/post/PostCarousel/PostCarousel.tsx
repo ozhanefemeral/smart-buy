@@ -9,8 +9,10 @@ const dummyPosts: Post[] = [
   {
     id: "123-asd",
     title: "House 1",
+    thumbnail:
+      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-home-thumbnail.webp",
     description: "A beautiful house",
-    price: 100000,
+    price: 250000,
     createdAt: new Date(),
     updatedAt: new Date(),
     images: [],
@@ -19,8 +21,22 @@ const dummyPosts: Post[] = [
   {
     id: "987-qwe",
     title: "Car 1",
+    thumbnail:
+      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-car-thumbnail.webp",
     description: "A beautiful car",
-    price: 100000,
+    price: 50000,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    images: [],
+    ownerId: "123",
+  },
+  {
+    id: "456-zxc",
+    title: "Phone 1",
+    thumbnail:
+      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-phone-thumbnail.webp",
+    description: "A beautiful phone",
+    price: 1000,
     createdAt: new Date(),
     updatedAt: new Date(),
     images: [],
