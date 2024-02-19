@@ -7,6 +7,7 @@ import { getPostById } from "@/lib/queries/post";
 import { Post } from "@prisma/client";
 import { PostOwnerInfo } from "@/components/post-owner/PostOwnerInfo/PostOwnerInfo";
 import SharePostCard from "./SharePost";
+import { S3BaseUrl } from "@/lib/s3";
 
 type Params = {
   id: Post["id"];
@@ -25,7 +26,7 @@ export default async function PostPage({ params }: { params: Params }) {
             <div className="flex max-h-[500px] flex-col border-b pb-4 lg:flex-row lg:space-x-4">
               <div className="overflow-hidden rounded-lg lg:w-4/5">
                 <Image
-                  src={post.images[0] || placeholder}
+                  src={`${S3BaseUrl}/${post.images[0]}` || placeholder}
                   alt={post.title}
                   // below is the fix for having a 100% width image
                   // discussed on: https://github.com/vercel/next.js/discussions/18474#discussioncomment-5501724

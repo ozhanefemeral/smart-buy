@@ -4,17 +4,20 @@ import {
   PutObjectCommandInput,
 } from "@aws-sdk/client-s3";
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
-
+const AWS_REGION = process.env.AWS_REGION;
 const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 
+const s3 = new S3Client({ region: AWS_REGION });
+
 async function createPostImageKey(postTitle: string, index: number) {
-  return `${postTitle}-${Date.now()}-${index}`;
+  return encodeURI(`${postTitle.replaceAll(" ", "-")}-${Date.now()}-${index}`);
 }
 
 async function fileToBuffer(file: File): Promise<Buffer> {
   return (await file.arrayBuffer()) as Buffer;
 }
+
+export const S3BaseUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com`;
 
 export async function uploadFileToS3(
   file: File,
@@ -31,7 +34,7 @@ export async function uploadFileToS3(
 
   try {
     const data = await s3.send(command);
-    return `https://${AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.name}`;
+    return fileKey;
   } catch (error) {
     console.error("Error uploading file to S3:", error);
     throw new Error("Failed to upload file to S3");
