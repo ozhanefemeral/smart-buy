@@ -8,6 +8,7 @@ export type PostCreateInput = {
   description: string;
   price: number;
   email: string;
+  images: string[];
 };
 
 export const getPostById = async (id: Post["id"]) => {
@@ -37,6 +38,7 @@ export const createPost = async (input: PostCreateInput) => {
       description: input.description,
       price: input.price,
       ownerId,
+      images: input.images,
     },
   });
 

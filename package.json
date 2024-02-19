@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.511.0",
+    "@aws-sdk/client-s3": "^3.515.0",
     "@aws-sdk/lib-dynamodb": "^3.511.0",
     "@aws-sdk/util-dynamodb": "^3.511.0",
     "@next-auth/prisma-adapter": "^1.0.7",

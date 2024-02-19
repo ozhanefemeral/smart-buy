@@ -88,6 +88,14 @@ export const CreatePostForm: React.FC = () => {
                 name="price"
                 type="number"
               />
+              <Label htmlFor="images">Images</Label>
+              <Input
+                name="images"
+                id="images"
+                type="file"
+                multiple
+                accept="image/*"
+              />
             </div>
             <div className="hidden justify-center lg:flex">
               <Image src={webShoppingSvg} alt="Web shopping" width={250} />
