@@ -5,7 +5,7 @@ import {
   UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-import { dynamoDBClient } from "@/lib/dynamodb";
+import { dynamoDBClient } from ".";
 import { Post } from "@/components/post";
 
 const TableName = "PostStats";

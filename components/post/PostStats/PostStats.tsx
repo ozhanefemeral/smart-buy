@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { getHoueStats } from "@/lib/dynamodb";
+import { getHoueStats } from "@/lib/aws";
 
 export type PostStats = {
   viewCount: number;

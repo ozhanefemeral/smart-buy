@@ -1,13 +1,11 @@
-import Image from "next/image";
-import React, { Suspense } from "react";
-import placeholder from "@/public/placeholder.svg";
-import { incrementViewCount } from "@/lib/dynamodb";
 import { PostStats } from "@/components/post";
+import { PostOwnerInfo } from "@/components/post-owner/PostOwnerInfo/PostOwnerInfo";
+import { incrementViewCount } from "@/lib/aws";
 import { getPostById } from "@/lib/queries/post";
 import { Post } from "@prisma/client";
-import { PostOwnerInfo } from "@/components/post-owner/PostOwnerInfo/PostOwnerInfo";
-import SharePostCard from "./SharePost";
+import { Suspense } from "react";
 import { PostImages } from "./PostImages";
+import SharePostCard from "./SharePost";
 
 type Params = {
   id: Post["id"];

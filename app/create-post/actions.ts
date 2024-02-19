@@ -1,6 +1,6 @@
 "use server";
 import { createPost } from "@/lib/queries/post";
-import { uploadPostImagesToS3 } from "@/lib/s3";
+import { uploadPostImagesToS3 } from "@/lib/aws";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 

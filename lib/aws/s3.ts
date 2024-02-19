@@ -1,7 +1,7 @@
 import {
-  S3Client,
   PutObjectCommand,
   PutObjectCommandInput,
+  S3Client,
 } from "@aws-sdk/client-s3";
 
 const AWS_REGION = process.env.AWS_REGION;
