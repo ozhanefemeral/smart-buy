@@ -5,14 +5,18 @@ import { z } from "zod";
 
 const createPostSchema = z.object({
   email: z.string().email(),
-  title: z.string().min(3).max(100),
-  description: z.string().min(3).max(1000),
-  price: z.coerce.number().int().min(0),
+  title: z
+    .string()
+    .min(3, { message: "Title must be at least 3 characters" })
+    .max(40, { message: "Title must be at most 40 characters" }),
+  description: z
+    .string()
+    .min(3, { message: "Description must be at least 3 characters" })
+    .max(1000, { message: "Description must be at most 1000 characters" }),
+  price: z.coerce.number().int().min(0, { message: "Price must be positive" }),
 });
 
-export async function createPostAction(formData: FormData) {
-  console.log("Creating post");
-
+export async function createPostAction(prevState: any, formData: FormData) {
   const validatedFields = createPostSchema.safeParse(
     Object.fromEntries(formData),
   );
@@ -26,7 +30,6 @@ export async function createPostAction(formData: FormData) {
   }
 
   const post = await createPost(validatedFields.data);
-  console.log(post);
 
   redirect(`/posts/${post.id}`);
 }
