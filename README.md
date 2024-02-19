@@ -20,6 +20,7 @@ Smart Buy is an online marketplace built with Next.js, incorporating various tec
 ## Best Practices
 
 - **Exporting Components**: Components are exported using `index.ts` files to provide a single entry point for importing. For example:
+
   ```typescript
   // components/post/index.ts
   export type { Post } from "@prisma/client";
@@ -27,14 +28,16 @@ Smart Buy is an online marketplace built with Next.js, incorporating various tec
   export * from "./PostCard";
   export * from "./PostCarousel";
   export * from "./PostStats";
+  ```
 
 - **Import Aliases**: Import aliases are used to simplify imports and improve readability. For example:
+
   ```typescript
   // Before
-  import { authOptions } from "../api/auth/[...nextauth]/route";
+  import { authOptions } from "../../../lib/auth";
 
   // After
-  import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+  import { authOptions } from "@/lib/auth";
   ```
 
 ## Usage

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { getServerSession } from "next-auth";
 import { SignInButton } from "@/components/shared/SignInButton";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function LoginCTACard() {
   const session = await getServerSession(authOptions);
