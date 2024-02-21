@@ -45,7 +45,6 @@ export async function uploadPostImagesToS3(
   files: File[],
   title: string,
 ): Promise<string[]> {
-  // loop through the files and upload them to S3, give them a unique name with date, time and index
   const imageUrls = await Promise.all(
     files.map(async (file, index) => {
       const fileKey = await createPostImageKey(title, index);
