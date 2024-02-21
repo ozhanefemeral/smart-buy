@@ -22,7 +22,7 @@ export default async function CreatePost() {
 
   return (
     <div>
-      <h1 className="mb-4 text-3xl font-bold">Publish an announcement</h1>
+      <h1 className="mb-4 text-3xl font-bold">Publish an advertisement</h1>
       <CreatePostForm />
     </div>
   );
