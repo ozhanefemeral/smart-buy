@@ -6,6 +6,7 @@ import { Post } from "@prisma/client";
 import { Suspense } from "react";
 import { PostImages } from "./PostImages";
 import SharePostCard from "./SharePost";
+import { FavoritePostButton } from "@/components/post/FavoritePostButton/FavoritePostButton";
 
 type Params = {
   id: Post["id"];
@@ -22,8 +23,11 @@ export default async function PostPage({ params }: { params: Params }) {
         <div className="flex flex-col space-y-4 xl:w-2/3">
           <div className="rounded-lg border p-4">
             <PostImages post={post} />
-            <div className="flex flex-col space-y-2 pt-4">
-              <h1 className="text-2xl font-semibold">{post.title}</h1>
+            <div className="relative flex flex-col space-y-2 pt-4">
+              <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-semibold">{post.title}</h1>
+                <FavoritePostButton postId={id} />
+              </div>
               <p className="max-h-96 overflow-y-auto whitespace-pre-wrap">
                 {post.description}
               </p>

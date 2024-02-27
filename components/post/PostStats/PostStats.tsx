@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { getHoueStats } from "@/lib/aws";
+import { getPostStats } from "@/lib/aws";
 
 export type PostStats = {
   viewCount: number;
-  favoriteCount: number;
+  favouriteCount: number;
 };
 
 type PostStatsProps = {
@@ -11,7 +11,7 @@ type PostStatsProps = {
 };
 
 export async function PostStats({ postId }: PostStatsProps) {
-  const post = (await getHoueStats(postId)) as PostStats;
+  const post = (await getPostStats(postId)) as PostStats;
 
   return (
     <Card>
@@ -22,8 +22,10 @@ export async function PostStats({ postId }: PostStatsProps) {
             <p className="text-xl font-semibold">{post.viewCount}</p>
           </div>
           <div className="flex w-1/2 flex-col items-center">
-            <h3 className="font-semibold">Favorites</h3>
-            <p className="text-xl font-semibold">{post.favoriteCount}</p>
+            <h3 className="font-semibold">Favourites</h3>
+            <p className="text-xl font-semibold" id="postFavouriteCount">
+              {post.favouriteCount}
+            </p>
           </div>
         </div>
       </CardContent>

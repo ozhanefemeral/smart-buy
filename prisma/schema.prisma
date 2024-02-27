@@ -50,7 +50,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  owns          Post[]
+  owns          Post[]    @relation("Owner")
+  favourites    Post[]    @relation("FavouritedBy")
   lastOnline    DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -65,14 +66,15 @@ model VerificationToken {
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  title       String
-  price       Int
-  description String?
-  thumbnail   String?
-  images      String[]
-  owner       User     @relation(fields: [ownerId], references: [id])
-  ownerId     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  title        String
+  price        Int
+  description  String?
+  thumbnail    String?
+  images       String[]
+  owner        User     @relation(fields: [ownerId], references: [id], name: "Owner")
+  ownerId      String
+  favouritedBy User[]   @relation("FavouritedBy")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

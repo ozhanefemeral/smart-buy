@@ -56,7 +56,7 @@ export async function addPost(postId: Post["id"]) {
   }
 }
 
-export async function getHoueStats(postId: Post["id"]) {
+export async function getPostStats(postId: Post["id"]) {
   const params = {
     TableName,
     Key: marshall({ postId }),
@@ -69,6 +69,60 @@ export async function getHoueStats(postId: Post["id"]) {
   } catch (error) {
     console.error(
       `Error getting post stats for post ${postId} from DynamoDB:`,
+      error,
+    );
+    throw error;
+  }
+}
+
+export async function incrementFavouriteCount(postId: Post["id"]) {
+  const params = {
+    TableName,
+    Key: marshall({ postId }),
+    UpdateExpression: "ADD #favouriteCount :increment",
+    ExpressionAttributeNames: {
+      "#favouriteCount": "favouriteCount",
+    },
+    ExpressionAttributeValues: marshall({
+      ":increment": 1,
+    }),
+    ReturnValues: "ALL_NEW",
+  } as UpdateItemCommandInput;
+
+  try {
+    const command = new UpdateItemCommand(params);
+    const data = await dynamoDBClient.send(command);
+    return unmarshall(data.Attributes ?? {});
+  } catch (error) {
+    console.error(
+      `Error incrementing favourite count for post ${postId} in DynamoDB:`,
+      error,
+    );
+    throw error;
+  }
+}
+
+export async function decrementFavouriteCount(postId: Post["id"]) {
+  const params = {
+    TableName,
+    Key: marshall({ postId }),
+    UpdateExpression: "ADD #favouriteCount :decrement",
+    ExpressionAttributeNames: {
+      "#favouriteCount": "favouriteCount",
+    },
+    ExpressionAttributeValues: marshall({
+      ":decrement": -1,
+    }),
+    ReturnValues: "ALL_NEW",
+  } as UpdateItemCommandInput;
+
+  try {
+    const command = new UpdateItemCommand(params);
+    const data = await dynamoDBClient.send(command);
+    return unmarshall(data.Attributes ?? {});
+  } catch (error) {
+    console.error(
+      `Error decrementing favourite count for post ${postId} in DynamoDB:`,
       error,
     );
     throw error;

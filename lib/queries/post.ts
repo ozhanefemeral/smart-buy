@@ -2,6 +2,11 @@ import prisma from "@/lib/prisma";
 import { Post } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { getUserIdByEmail } from "./user";
+import {
+  addPost,
+  decrementFavouriteCount,
+  incrementFavouriteCount,
+} from "../aws";
 
 export type PostCreateInput = {
   title: string;
@@ -42,5 +47,65 @@ export const createPost = async (input: PostCreateInput) => {
     },
   });
 
+  addPost(post.id);
   return post;
+};
+
+export const addPostToUserFavourites = async (
+  postId: Post["id"],
+  email: string,
+) => {
+  const userId = await getUserIdByEmail(email);
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+    include: {
+      favourites: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const isFavorite = user.favourites.some((fav) => fav.id === postId);
+
+  if (isFavorite) {
+    await prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        favourites: {
+          disconnect: {
+            id: postId,
+          },
+        },
+      },
+    });
+    decrementFavouriteCount(postId);
+    return false;
+  }
+
+  await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      favourites: {
+        connect: {
+          id: postId,
+        },
+      },
+    },
+  });
+
+  incrementFavouriteCount(postId);
+  return true;
 };

@@ -33,3 +33,20 @@ export const getUserIdByEmail = async (email: string) => {
 
   return user?.id;
 };
+
+export const getUserFavouritesByEmail = async (email: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+    include: {
+      favourites: true,
+    },
+  });
+
+  if (!user) {
+    return [];
+  }
+
+  return user.favourites;
+};
