@@ -34,7 +34,9 @@ export function FavoritePostButton({ postId }: FavoritePostButtonProps) {
     setIsFavorite(result);
 
     // updates the favorite count in the post stats, manually
-    const postFavouriteCount = document.getElementById("postFavouriteCount");
+    const postFavouriteCount = document.getElementsByClassName(
+      "post-favourite-count",
+    )[0];
     if (postFavouriteCount) {
       const count = parseInt(postFavouriteCount.textContent!);
       postFavouriteCount.textContent = result ? `${count + 1}` : `${count - 1}`;

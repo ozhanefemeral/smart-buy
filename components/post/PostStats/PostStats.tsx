@@ -29,7 +29,7 @@ export async function PostStats({ postId }: PostStatsProps) {
             <h3 className="font-semibold">Favourites</h3>
             <CountingNumbers
               value={post.favouriteCount}
-              className="text-xl font-semibold"
+              className="post-favourite-count text-xl font-semibold"
             />
           </div>
         </div>
