@@ -3,6 +3,7 @@ import {
   PutObjectCommandInput,
   S3Client,
 } from "@aws-sdk/client-s3";
+import sharp from "sharp";
 
 const AWS_REGION = process.env.AWS_REGION;
 const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
@@ -10,11 +11,18 @@ const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 const s3 = new S3Client({ region: AWS_REGION });
 
 async function createPostImageKey(postTitle: string, index: number) {
-  return encodeURI(`${postTitle.replaceAll(" ", "-")}-${Date.now()}-${index}`);
+  return encodeURI(
+    `${postTitle.replaceAll(" ", "-")}-${Date.now()}-${index}.webp`,
+  );
 }
 
 async function fileToBuffer(file: File): Promise<Buffer> {
-  return (await file.arrayBuffer()) as Buffer;
+  return (
+    sharp(await file.arrayBuffer())
+      // https://sharp.pixelplumbing.com/api-output#webp
+      .webp()
+      .toBuffer()
+  );
 }
 
 export const S3BaseUrl = `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com`;
