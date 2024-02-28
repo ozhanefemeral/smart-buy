@@ -11,7 +11,7 @@ export async function LoginCTACard() {
   if (isLogged) return null;
 
   return (
-    <div className="rounded-lg bg-sky-100 p-4">
+    <div className="rounded-lg bg-sky-50 p-4">
       <div className="flex flex-row items-start space-x-4">
         <Image
           alt="house search"

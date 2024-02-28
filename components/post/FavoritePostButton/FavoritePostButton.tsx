@@ -53,6 +53,7 @@ export function FavoritePostButton({ postId }: FavoritePostButtonProps) {
       variant="outline"
       onClick={handleClick}
       disabled={!canClick}
+      aria-label="Favorite post"
     >
       {isFavorite ? (
         <HeartOff fill="#ff0000" color="#ff0000" />
