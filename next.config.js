@@ -7,6 +7,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "vercel.com",
       "smart-buy-bucket.s3.amazonaws.com",
+      "smart-buy-bucket.s3.eu-central-1.amazonaws.com",
     ],
   },
   async redirects() {
