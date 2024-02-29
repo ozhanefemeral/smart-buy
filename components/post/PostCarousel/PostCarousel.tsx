@@ -1,11 +1,11 @@
-import { Post, PostCard } from "@/components/post/";
+import { PostCard } from "@/components/post/PostCard";
 import { CarouselBase } from "@/components/shared/carousels/CarouselBase";
 
 interface PostCarouselProps {
   endpoint: string;
 }
 
-const dummyPosts: Post[] = [
+const dummyPosts = [
   {
     id: "123-asd",
     title: "House 1",

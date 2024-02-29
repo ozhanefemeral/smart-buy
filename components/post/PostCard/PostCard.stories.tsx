@@ -4,13 +4,13 @@ import React from "react";
 import { PostCard } from "./PostCard";
 import { Post } from "@prisma/client";
 
-const availableHouse: Post = {
+const phone: Post = {
   id: "123-asd",
-  title: "House 1",
+  title: "iPhone 15 Pro",
   thumbnail:
-    "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-home-thumbnail.webp",
-  description: "A beautiful house",
-  price: 100000,
+    "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-phone-thumbnail.webp",
+  description: "Brand new iPhone 15 Pro",
+  price: 1000,
   createdAt: new Date(),
   updatedAt: new Date(),
   images: [],
@@ -21,7 +21,7 @@ const Template: StoryFn<typeof PostCard> = (args) => <PostCard {...args} />;
 
 export const Available = Template.bind({});
 Available.args = {
-  post: availableHouse,
+  post: phone,
 };
 
 const meta: Meta<typeof PostCard> = {
