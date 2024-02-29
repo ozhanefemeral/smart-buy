@@ -17,6 +17,7 @@ import { useSession } from "next-auth/react";
 import webShoppingSvg from "@/public/web-shopping.svg";
 import Image from "next/image";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useState } from "react";
 
 const initialState = {
   email: "",
@@ -39,6 +40,16 @@ export const CreatePostForm: React.FC = () => {
   const session = useSession();
   const [state, formAction] = useFormState(createPostAction, initialState);
   const hasErrors = !!state.errors;
+  const [images, setImages] = useState<File[]>([]);
+  const [thumbnailIndex, setThumbnailIndex] = useState<number | undefined>(
+    undefined,
+  );
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    setImages(files);
+    setThumbnailIndex(0);
+  };
 
   return (
     <form action={formAction}>
@@ -62,6 +73,7 @@ export const CreatePostForm: React.FC = () => {
         name="email"
         value={session?.data?.user?.email || undefined}
       />
+      <input type="hidden" name="thumbnailIndex" value={thumbnailIndex} />
       <Card>
         <CardHeader>
           <CardTitle>Provide a catchy title for your advertisement</CardTitle>
@@ -95,7 +107,33 @@ export const CreatePostForm: React.FC = () => {
                 type="file"
                 multiple
                 accept="image/*"
+                onChange={handleImageChange}
               />
+              {images.length > 0 && (
+                <>
+                  <Label>Thumbnail</Label>
+                  <div className="flex gap-2 overflow-x-auto">
+                    {images.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`border-4 ${
+                          thumbnailIndex === index
+                            ? "border-blue-500"
+                            : "border-transparent"
+                        }`}
+                        onClick={() => setThumbnailIndex(index)}
+                      >
+                        <Image
+                          src={URL.createObjectURL(image)}
+                          alt="Image"
+                          width={100}
+                          height={100}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
             <div className="hidden justify-center lg:flex">
               <Image src={webShoppingSvg} alt="Web shopping" width={250} />

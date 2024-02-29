@@ -27,10 +27,11 @@ const createPostSchema = z.object({
   images: z
     .custom<File>()
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 2MB.`)
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
-      ".jpg, .jpeg, .png and .webp files are accepted.",
-    ),
+    .refine((file) => {
+      console.log(file.type);
+      return ACCEPTED_IMAGE_TYPES.includes(file.type);
+    }, ".jpg, .jpeg, .png and .webp files are accepted."),
+  thumbnailIndex: z.coerce.number().int().optional(),
 });
 
 export async function createPostAction(prevState: any, formData: FormData) {
@@ -45,14 +46,21 @@ export async function createPostAction(prevState: any, formData: FormData) {
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-  const images = formData.getAll("images") as File[];
 
-  const imageUrls = await uploadPostImagesToS3(
-    images,
-    validatedFields.data.title,
-  );
+  const hasImages = formData.getAll("images").length > 0;
+  let imageUrls: string[] | undefined;
 
-  const post = await createPost({ ...validatedFields.data, images: imageUrls });
+  if (hasImages) {
+    console.log(formData.getAll("images"));
+    const images = formData.getAll("images") as File[];
+
+    imageUrls = await uploadPostImagesToS3(images, validatedFields.data.title);
+  }
+
+  const post = await createPost({
+    ...validatedFields.data,
+    images: imageUrls,
+  });
 
   redirect(`/posts/${post.id}`);
 }

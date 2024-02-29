@@ -13,7 +13,8 @@ export type PostCreateInput = {
   description: string;
   price: number;
   email: string;
-  images: string[];
+  images?: string[];
+  thumbnailIndex?: number;
 };
 
 export const getPostById = async (id: Post["id"]) => {
@@ -37,6 +38,14 @@ export const createPost = async (input: PostCreateInput) => {
     throw new Error("User not found");
   }
 
+  // declare const thumbnail
+  // if input.images is not undefined and input.thumbnailIndex is not undefined set thumbnail to input.images[input.thumbnailIndex]
+
+  const thumbnail =
+    input.images && input.thumbnailIndex
+      ? input.images[input.thumbnailIndex]
+      : undefined;
+
   const post = await prisma.post.create({
     data: {
       title: input.title,
@@ -44,6 +53,7 @@ export const createPost = async (input: PostCreateInput) => {
       price: input.price,
       ownerId,
       images: input.images,
+      thumbnail,
     },
   });
 
@@ -108,4 +118,13 @@ export const addPostToUserFavourites = async (
 
   incrementFavouriteCount(postId);
   return true;
+};
+
+export const getMostRecentPosts = async () => {
+  return prisma.post.findMany({
+    take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 };
