@@ -1,4 +1,5 @@
 import "./globals.css";
+import "swiper/css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter } from "./fonts";

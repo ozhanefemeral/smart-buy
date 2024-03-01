@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Card,
   CardDescription,
@@ -7,17 +5,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Image from "next/image";
-import { Post } from "@prisma/client";
-import Link from "next/link";
+import { getImageUrl } from "@/lib/utils";
 import placeHolderSVG from "@/public/placeholder.svg";
+import { Post } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
 
 export function PostCard({ post }: { post: Post }) {
   return (
     <Card className="flex w-[300px] flex-col">
       <CardHeader>
         <Image
-          src={post.thumbnail || placeHolderSVG}
+          src={post.thumbnail ? getImageUrl(post.thumbnail) : placeHolderSVG}
           alt={post.title}
           width={350}
           height={200}

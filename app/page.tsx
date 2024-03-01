@@ -1,11 +1,7 @@
-import Card from "@/components/home/card";
-import { DEPLOY_URL } from "@/lib/constants";
-import { Github, Twitter } from "@/components/shared/icons";
 import WebVitals from "@/components/home/web-vitals";
-import ComponentGrid from "@/components/home/component-grid";
+import { MostRecentPosts } from "@/components/post/MostRecent";
+import { DEPLOY_URL } from "@/lib/constants";
 import Image from "next/image";
-import { nFormatter } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
@@ -26,7 +22,8 @@ export default async function Home() {
 
   return (
     <>
-      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+      <MostRecentPosts />
+      {/* <div className="z-10 w-full max-w-xl px-5 xl:px-0">
         <a
           href="https://twitter.com/steventey/status/1613928948915920896"
           target="_blank"
@@ -108,7 +105,7 @@ export default async function Home() {
             large={large}
           />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
