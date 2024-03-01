@@ -49,10 +49,48 @@ export async function uploadFileToS3(
   }
 }
 
+export async function uploadBufferToS3(
+  buffer: Buffer,
+  fileKey: string,
+  contentType: string,
+): Promise<string> {
+  const params: PutObjectCommandInput = {
+    Bucket: AWS_BUCKET_NAME,
+    Key: fileKey,
+    Body: buffer,
+    ContentType: contentType,
+  };
+
+  const command = new PutObjectCommand(params);
+
+  try {
+    const data = await s3.send(command);
+    return fileKey;
+  } catch (error) {
+    console.error("Error uploading file to S3:", error);
+    throw new Error("Failed to upload file to S3");
+  }
+}
+
+export async function createThumbnailFromImage(
+  file: File,
+  thumbnailIndex: number,
+): Promise<string> {
+  const thumbnail = await sharp(await file.arrayBuffer())
+    .webp()
+    .resize(300, 300)
+    .toBuffer();
+
+  const thumbnailKey = file.name.replace(/\.[^/.]+$/, "") + "-thumbnail.webp";
+
+  return uploadBufferToS3(thumbnail, thumbnailKey, "image/webp");
+}
+
 export async function uploadPostImagesToS3(
   files: File[],
   title: string,
-): Promise<string[]> {
+  thumbnailIndex: number,
+): Promise<{ imageUrls: string[]; thumbnail: string }> {
   const imageUrls = await Promise.all(
     files.map(async (file, index) => {
       const fileKey = await createPostImageKey(title, index);
@@ -60,5 +98,10 @@ export async function uploadPostImagesToS3(
     }),
   );
 
-  return imageUrls;
+  const thumbnail = await createThumbnailFromImage(
+    files[thumbnailIndex],
+    thumbnailIndex,
+  );
+
+  return { imageUrls, thumbnail };
 }

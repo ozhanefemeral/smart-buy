@@ -67,3 +67,7 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
+
+export const getImageUrl = (key: string) => {
+  return `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${key}`;
+};

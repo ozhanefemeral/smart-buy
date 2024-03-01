@@ -49,16 +49,23 @@ export async function createPostAction(prevState: any, formData: FormData) {
 
   const hasImages = formData.getAll("images").length > 0;
   let imageUrls: string[] | undefined;
+  let thumbnail: string | undefined;
 
   if (hasImages) {
-    console.log(formData.getAll("images"));
     const images = formData.getAll("images") as File[];
-
-    imageUrls = await uploadPostImagesToS3(images, validatedFields.data.title);
+    const thumbnailIndex = validatedFields.data.thumbnailIndex || 0;
+    let result = await uploadPostImagesToS3(
+      images,
+      validatedFields.data.title,
+      thumbnailIndex,
+    );
+    imageUrls = result.imageUrls;
+    thumbnail = result.thumbnail;
   }
 
   const post = await createPost({
     ...validatedFields.data,
+    thumbnail,
     images: imageUrls,
   });
 
