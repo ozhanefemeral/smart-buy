@@ -27,7 +27,7 @@ export default async function RootLayout({
           <Suspense fallback="...">
             <Nav />
           </Suspense>
-          <main className="flex min-h-screen w-full flex-col py-8 md:px-8">
+          <main className="mx-auto flex min-h-screen max-w-screen-xl flex-col px-4 py-8 lg:px-0">
             {children}
           </main>
           <Analytics />

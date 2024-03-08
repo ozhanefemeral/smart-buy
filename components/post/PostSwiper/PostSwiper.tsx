@@ -9,6 +9,8 @@ type PostSwiperProps = {
   posts: Post[];
 };
 
+const maxSlideCount = 4;
+
 export const PostSwiper = ({ posts }: PostSwiperProps) => {
   let { width } = useMediaQuery();
 
@@ -16,7 +18,11 @@ export const PostSwiper = ({ posts }: PostSwiperProps) => {
   const slidesPerView = width / (300 + 40);
 
   return (
-    <Swiper slidesPerView={slidesPerView}>
+    <Swiper
+      slidesPerView={
+        slidesPerView > maxSlideCount ? maxSlideCount : slidesPerView
+      }
+    >
       {posts.map((post, index) => (
         <SwiperSlide key={index}>
           <PostCard post={post} />
