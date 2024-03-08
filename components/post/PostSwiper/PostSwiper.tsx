@@ -9,13 +9,13 @@ type PostSwiperProps = {
   posts: Post[];
 };
 
-const maxSlideCount = 4;
+const maxSlideCount = 4.1;
 
 export const PostSwiper = ({ posts }: PostSwiperProps) => {
   let { width } = useMediaQuery();
 
   if (!width) width = 0;
-  const slidesPerView = width / (300 + 40);
+  const slidesPerView = width / (300 + 40) + 0.1;
 
   return (
     <Swiper
