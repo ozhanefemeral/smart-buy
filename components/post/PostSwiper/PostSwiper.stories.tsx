@@ -1,3 +1,4 @@
+import { withAppLayout } from "@/components/decorators/withPageLayout";
 import { PostSwiper } from "./PostSwiper";
 import { Meta, StoryFn } from "@storybook/react";
 
@@ -83,6 +84,7 @@ const meta: Meta<typeof PostSwiper> = {
       appDirectory: true,
     },
   },
+  decorators: [withAppLayout],
 };
 
 export default meta;

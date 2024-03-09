@@ -1,11 +1,11 @@
 import "./globals.css";
-import "swiper/css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav";
 import { Suspense } from "react";
 import { Providers } from "@/components/layout/providers";
+import { PageLayout } from "@/components/layout/layout";
 
 export const metadata = {
   title: "Precedent - Building blocks for your Next.js project",
@@ -27,9 +27,7 @@ export default async function RootLayout({
           <Suspense fallback="...">
             <Nav />
           </Suspense>
-          <main className="mx-auto flex min-h-screen max-w-screen-xl flex-col px-4 py-8 lg:px-0">
-            {children}
-          </main>
+          <PageLayout>{children}</PageLayout>
           <Analytics />
         </body>
       </Providers>
