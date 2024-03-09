@@ -10,8 +10,11 @@ import placeHolderSVG from "@/public/placeholder.svg";
 import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+interface PostCardProps {
+  post: Post;
+}
 
-export function PostCard({ post }: { post: Post }) {
+export const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
     <Card className="flex w-[300px] flex-col">
       <CardHeader>
@@ -36,4 +39,4 @@ export function PostCard({ post }: { post: Post }) {
       </CardFooter>
     </Card>
   );
-}
+};
