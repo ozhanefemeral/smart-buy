@@ -7,8 +7,7 @@ import { Post } from "@prisma/client";
 const phone: Post = {
   id: "123-asd",
   title: "iPhone 15 Pro",
-  thumbnail:
-    "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-phone-thumbnail.webp",
+  thumbnail: "seed-phone-thumbnail.webp",
   description: "Brand new iPhone 15 Pro",
   price: 1000,
   createdAt: new Date(),
