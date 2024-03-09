@@ -45,6 +45,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   phone         String?
+  phoneVerified DateTime?
   email         String?   @unique
   emailVerified DateTime?
   image         String?

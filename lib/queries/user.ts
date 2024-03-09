@@ -50,3 +50,33 @@ export const getUserFavouritesByEmail = async (email: string) => {
 
   return user.favourites;
 };
+
+export const updateUserPhone = async (email: User["email"], phone: string) => {
+  if (!email) return;
+
+  const user = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      phone,
+    },
+  });
+
+  return user;
+};
+
+export const verifyPhone = async (email: User["email"], otp: string) => {
+  if (!email) return;
+
+  const user = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      phoneVerified: new Date(),
+    },
+  });
+
+  return user;
+};
