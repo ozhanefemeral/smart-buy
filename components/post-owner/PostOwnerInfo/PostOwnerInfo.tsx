@@ -12,6 +12,7 @@ import Image from "next/image";
 import { PhoneButton } from "./PhoneButton";
 import { User } from "@prisma/client";
 import { getUserById } from "@/lib/queries/user";
+import Link from "next/link";
 
 type Props = {
   id: User["id"];
@@ -59,11 +60,13 @@ export const PostOwnerInfo: React.FC<Props> = async ({ id }) => {
           height={60}
         />
         <div className="flex w-full flex-col overflow-hidden">
-          <CardTitle>
-            <div className="scroll-m-20 text-xl font-semibold">
-              {postOwner.name}
-            </div>
-          </CardTitle>
+          <Link href={`/profile/${postOwner.id}`}>
+            <CardTitle>
+              <div className="scroll-m-20 text-xl font-semibold">
+                {postOwner.name}
+              </div>
+            </CardTitle>
+          </Link>
           <CardDescription>
             Member since{" "}
             <span className="font-bold">

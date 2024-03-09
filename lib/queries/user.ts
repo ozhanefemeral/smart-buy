@@ -24,6 +24,16 @@ export const getUserById = async (id: User["id"], session: Session | null) => {
   return postOwner;
 };
 
+export const getUserByEmail = async (email: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  return user;
+};
+
 export const getUserIdByEmail = async (email: string) => {
   const user = await prisma.user.findUnique({
     where: {

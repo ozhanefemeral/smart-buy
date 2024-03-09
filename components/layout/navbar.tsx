@@ -2,13 +2,13 @@
 
 import { CreatePostButton } from "@/components/cta/create-post/";
 import useScroll from "@/lib/hooks/use-scroll";
-import { Session } from "next-auth";
+import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 
-export default function NavBar({ session }: { session: Session | null }) {
+export default function NavBar({ user }: { user?: User | null }) {
   const { SignInModal } = useSignInModal();
   const scrolled = useScroll(50);
 
@@ -35,7 +35,7 @@ export default function NavBar({ session }: { session: Session | null }) {
           </Link>
           <div className="flex items-center justify-end space-x-4">
             <CreatePostButton />
-            {session && <UserDropdown session={session} />}
+            {user && <UserDropdown user={user} />}
           </div>
         </div>
       </div>
