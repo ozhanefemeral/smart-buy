@@ -73,6 +73,7 @@ model Post {
   description  String?
   thumbnail    String?
   images       String[]
+  isPublished  Boolean  @default(false)
   owner        User     @relation(fields: [ownerId], references: [id], name: "Owner")
   ownerId      String
   favouritedBy User[]   @relation("FavouritedBy")

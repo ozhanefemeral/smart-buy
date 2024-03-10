@@ -1,31 +1,30 @@
-import { PrismaClient } from "@prisma/client";
+import { addPost } from "@/lib/aws";
 import { faker } from "@faker-js/faker";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const seedRealData = {
   car: {
-    thumbnail:
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-car-thumbnail.webp",
-    images: [
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-car.webp",
-    ],
+    title: "Ford F-150",
+    description:
+      "2022 Ford F-150 Lariat 4x4 SuperCrew Cab Styleside 5.5 ft. box 145 in. WB",
+    thumbnail: "seed-car-thumbnail.webp",
+    images: ["seed-car.webp"],
     price: 60000,
   },
   phone: {
-    thumbnail:
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-phone-thumbnail.webp",
-    images: [
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-phone.webp",
-    ],
+    title: "iPhone 14 256GB",
+    description: "Brand new iPhone 14 256GB in Midnight Black",
+    thumbnail: "seed-phone-thumbnail.webp",
+    images: ["seed-phone.webp"],
     price: 2500,
   },
   home: {
-    thumbnail:
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-home-thumbnail.webp",
-    images: [
-      "https://smart-buy-bucket.s3.eu-central-1.amazonaws.com/seed-home.webp",
-    ],
+    title: "3 Bedroom House - Miami",
+    description: "3 Bedroom, 2 Bathroom, 1,500 sqft home in Miami, FL",
+    thumbnail: "seed-home-thumbnail.webp",
+    images: ["seed-home.webp"],
     price: 250000,
   },
 };
@@ -49,25 +48,28 @@ async function seed() {
     },
   });
 
-  // Generate data for three posts
-  const postsData = Array.from({ length: 3 }).map((_, i) => {
-    const category = i % 3 === 0 ? "car" : i % 3 === 1 ? "phone" : "home";
-    return {
-      title: faker.lorem.sentence(),
-      description: faker.lorem.paragraph(),
-      price: seedRealData[category].price,
-      images: seedRealData[category].images,
-      thumbnail: seedRealData[category].thumbnail,
-      ownerId: user.id,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-  });
+  const posts = await Promise.all(
+    Object.values(seedRealData).map(async (post) => {
+      return prisma.post.create({
+        data: {
+          title: post.title,
+          description: post.description,
+          thumbnail: post.thumbnail,
+          images: post.images,
+          price: post.price,
+          ownerId: user.id,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      });
+    }),
+  );
 
-  // Batch create three posts for the user
-  await prisma.post.createMany({
-    data: postsData,
-  });
+  await Promise.all(
+    posts.map(async (post) => {
+      await addPost(post.id);
+    }),
+  );
 
   console.log("Seed completed 🌱");
 }
