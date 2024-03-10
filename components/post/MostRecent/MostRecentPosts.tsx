@@ -1,6 +1,6 @@
 import { getMostRecentPosts } from "@/lib/queries/post";
 import { Post } from "@prisma/client";
-import { PostSwiper } from "../PostSwiper";
+import { PostSwiper } from "@/components/post/PostSwiper";
 
 export async function MostRecentPosts() {
   const recentPosts: Post[] = await getMostRecentPosts();
