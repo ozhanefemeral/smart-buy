@@ -14,6 +14,7 @@ const phone: Post = {
   updatedAt: new Date(),
   images: [],
   ownerId: "123",
+  isPublished: true,
 };
 
 const Template: StoryFn<typeof PostCard> = (args) => <PostCard {...args} />;
