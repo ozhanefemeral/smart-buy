@@ -58,6 +58,7 @@ async function seed() {
           images: post.images,
           price: post.price,
           ownerId: user.id,
+          isPublished: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
