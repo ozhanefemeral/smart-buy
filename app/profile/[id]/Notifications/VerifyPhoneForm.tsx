@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { FormSubmitButton } from "@/components/shared/FormSubmitButton";
-import { verifyPhoneNumber } from "./actions";
+import { verifyPhoneNumber } from "../actions";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 

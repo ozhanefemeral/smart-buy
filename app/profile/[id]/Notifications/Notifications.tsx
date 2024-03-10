@@ -5,19 +5,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { User } from "@prisma/client";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { AddPhoneForm } from "./AddPhoneForm";
 import { Separator } from "@/components/ui/separator";
-import { VerifyPhoneForm } from "./VerifyPhoneForm";
+import { UserWithPosts } from "@/lib/queries/user";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { RocketIcon } from "lucide-react";
+import { AddPhoneForm } from "./AddPhoneForm";
+import { VerifyPhoneForm } from "./VerifyPhoneForm";
+import { CreatePostButton } from "@/components/cta/create-post";
 
-interface UserNotificationsProps {
-  user: User;
+interface NotificationsProps {
+  user: UserWithPosts;
 }
 
-export const UserNotifications = async ({ user }: UserNotificationsProps) => {
+export const Notifications = async ({ user }: NotificationsProps) => {
   const showPhoneAlert = !user.phone || !user.phoneVerified;
+  const showNoPostsAlert = user.owns.length === 0;
 
   const noNotifications = !showPhoneAlert;
 
@@ -64,6 +66,19 @@ export const UserNotifications = async ({ user }: UserNotificationsProps) => {
                 </AccordionItem>
               )}
             </Accordion>
+          </Alert>
+        )}
+        {showNoPostsAlert && (
+          <Alert>
+            <ExclamationTriangleIcon className="mr-2 h-5 w-5" />
+            <AlertTitle>No posts</AlertTitle>
+            <AlertDescription>
+              You haven&apos;t posted any ads yet. Why not post your first ad
+              now?
+            </AlertDescription>
+            <div className="mt-2 flex justify-end">
+              <CreatePostButton />
+            </div>
           </Alert>
         )}
       </div>

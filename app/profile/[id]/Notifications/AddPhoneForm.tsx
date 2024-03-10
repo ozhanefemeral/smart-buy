@@ -5,7 +5,7 @@ import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
-import { savePhoneNumber } from "./actions";
+import { savePhoneNumber } from "../actions";
 import { FormSubmitButton } from "@/components/shared/FormSubmitButton";
 
 export const AddPhoneForm = ({ user }: { user: User }) => {

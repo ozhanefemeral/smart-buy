@@ -1,8 +1,8 @@
 import { authOptions } from "@/lib/auth";
-import { getUserById } from "@/lib/queries/user";
+import { getUserById, getUserWithPosts } from "@/lib/queries/user";
 import { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
-import { UserNotifications } from "./Notifications";
+import { Notifications } from "./Notifications";
 import { redirect } from "next/navigation";
 
 export default async function ProfileLayout({
@@ -15,7 +15,7 @@ export default async function ProfileLayout({
   const { id } = params;
 
   const session = await getServerSession(authOptions);
-  const user = await getUserById(id, session);
+  const user = await getUserWithPosts(id, session);
   const isSelf = session?.user?.email === user?.email;
 
   if (!user) {
@@ -25,7 +25,7 @@ export default async function ProfileLayout({
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div className="col-span-2">{children}</div>
-      {isSelf && <UserNotifications user={user} />}
+      {isSelf && <Notifications user={user} />}
     </div>
   );
 }
