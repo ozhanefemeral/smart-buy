@@ -24,10 +24,6 @@ export const getPostById = async (id: Post["id"]) => {
     },
   });
 
-  if (!post) {
-    redirect("/404");
-  }
-
   return post;
 };
 
@@ -114,6 +110,9 @@ export const addPostToUserFavourites = async (
 
 export const getMostRecentPosts = async () => {
   return prisma.post.findMany({
+    where: {
+      isPublished: true,
+    },
     take: 5,
     orderBy: {
       createdAt: "desc",

@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { PostImages } from "./PostImages";
 import SharePostCard from "./SharePost";
 import { FavoritePostButton } from "@/components/post/FavoritePostButton/FavoritePostButton";
+import { redirect } from "next/navigation";
 
 type Params = {
   id: Post["id"];
@@ -15,6 +16,11 @@ type Params = {
 export default async function PostPage({ params }: { params: Params }) {
   const { id } = params;
   const post = await getPostById(id);
+
+  if (!post || !post.isPublished) {
+    redirect("/404");
+  }
+
   await incrementViewCount(id);
 
   return (
