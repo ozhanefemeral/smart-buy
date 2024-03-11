@@ -6,7 +6,7 @@ import { Post } from "@prisma/client";
 import { Suspense } from "react";
 import { PostImages } from "./PostImages";
 import SharePostCard from "./SharePost";
-import { FavoritePostButton } from "@/components/post/FavoritePostButton/FavoritePostButton";
+import { FavoritePostButton } from "components/post/FavoritePostButton";
 import { redirect } from "next/navigation";
 import { formatPostDate } from "@/lib/utils";
 
