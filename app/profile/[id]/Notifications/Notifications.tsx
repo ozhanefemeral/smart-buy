@@ -19,9 +19,9 @@ interface NotificationsProps {
 
 export const Notifications = async ({ user }: NotificationsProps) => {
   const showPhoneAlert = !user.phone || !user.phoneVerified;
-  const showNoPostsAlert = user.owns.length === 0;
+  const showNoPostsAlert = user.owns.length === 0 && !showPhoneAlert;
 
-  const noNotifications = !showPhoneAlert;
+  const noNotifications = !showPhoneAlert && !showNoPostsAlert;
 
   if (noNotifications) {
     return (
