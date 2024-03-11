@@ -32,6 +32,7 @@ const createPostSchema = z.object({
       return ACCEPTED_IMAGE_TYPES.includes(file.type);
     }, ".jpg, .jpeg, .png and .webp files are accepted."),
   thumbnailIndex: z.coerce.number().int().optional(),
+  isPublished: z.union([z.literal("on"), z.null()]),
 });
 
 export async function createPostAction(prevState: any, formData: FormData) {
@@ -66,6 +67,7 @@ export async function createPostAction(prevState: any, formData: FormData) {
   const post = await createPost({
     ...validatedFields.data,
     thumbnail,
+    isPublished: validatedFields.data.isPublished === "on",
     images: imageUrls,
   });
 

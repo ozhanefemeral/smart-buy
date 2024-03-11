@@ -18,6 +18,7 @@ import webShoppingSvg from "@/public/web-shopping.svg";
 import Image from "next/image";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useState } from "react";
+import { Switch } from "@/components/ui/switch";
 
 const initialState = {
   email: "",
@@ -134,6 +135,8 @@ export const CreatePostForm: React.FC = () => {
                   </div>
                 </>
               )}
+              <Label htmlFor="isPublished">Publish immediately</Label>
+              <Switch name="isPublished" id="isPublished" />
             </div>
             <div className="hidden justify-center lg:flex">
               <Image src={webShoppingSvg} alt="Web shopping" width={250} />

@@ -15,6 +15,7 @@ export type PostCreateInput = {
   email: string;
   images?: string[];
   thumbnail?: string;
+  isPublished?: boolean;
 };
 
 export const getPostById = async (id: Post["id"]) => {
@@ -42,6 +43,7 @@ export const createPost = async (input: PostCreateInput) => {
       ownerId,
       images: input.images,
       thumbnail: input.thumbnail,
+      isPublished: input.isPublished,
     },
   });
 
