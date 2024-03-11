@@ -12,6 +12,7 @@ import { FormSubmitButton } from "@/components/shared/FormSubmitButton";
 import { verifyPhoneNumber } from "../actions";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function VerifyPhoneForm({ user }: { user: User }) {
   const router = useRouter();
@@ -71,7 +72,11 @@ export function VerifyPhoneForm({ user }: { user: User }) {
             disabled={otpTimer > 0}
             onClick={handleSendOtp}
             type="button"
+            className="group"
           >
+            {otpTimer === 0 && (
+              <ReloadIcon className="mr-2 h-4 w-4 group-hover:animate-spin" />
+            )}
             Send code {otpTimer > 0 && "- " + otpTimer}
           </Button>
           <FormSubmitButton pendingText="Verifying..." text="Verify" />

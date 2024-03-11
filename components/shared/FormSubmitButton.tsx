@@ -2,6 +2,8 @@
 
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { LoadingCircle } from "./icons";
 
 interface FormSubmitButtonProps {
   pendingText?: string;
@@ -16,6 +18,7 @@ export const FormSubmitButton: React.FC<FormSubmitButtonProps> = ({
 
   return (
     <Button type="submit" disabled={pending}>
+      {pending && <LoadingCircle className="mr-2" />}
       {pending ? pendingText : text}
     </Button>
   );
