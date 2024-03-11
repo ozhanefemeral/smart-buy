@@ -13,6 +13,24 @@ export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
   }`;
 };
 
+export const formatPostDate = (date: Date): string => {
+  // if it is today, return "Today at 10:00 AM"
+  // else, return the date as "January 10th, 2023"
+
+  const sameDay = new Date(date).toDateString() === new Date().toDateString();
+
+  if (sameDay) {
+    // and remove the seconds
+    return `Today at ${new Date(date).toLocaleTimeString().slice(0, -3)}`;
+  }
+
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit,

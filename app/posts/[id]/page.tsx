@@ -8,6 +8,7 @@ import { PostImages } from "./PostImages";
 import SharePostCard from "./SharePost";
 import { FavoritePostButton } from "@/components/post/FavoritePostButton/FavoritePostButton";
 import { redirect } from "next/navigation";
+import { formatPostDate } from "@/lib/utils";
 
 type Params = {
   id: Post["id"];
@@ -36,6 +37,9 @@ export default async function PostPage({ params }: { params: Params }) {
               </div>
               <p className="max-h-96 overflow-y-auto whitespace-pre-wrap">
                 {post.description}
+              </p>
+              <p className="text-right text-sm">
+                Added {formatPostDate(post.createdAt)}
               </p>
             </div>
           </div>

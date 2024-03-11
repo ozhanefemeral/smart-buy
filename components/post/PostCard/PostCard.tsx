@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardDescription,
@@ -5,18 +6,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getImageUrl } from "@/lib/utils";
+import { formatPostDate, getImageUrl, timeAgo } from "@/lib/utils";
 import placeHolderSVG from "@/public/placeholder.svg";
 import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 interface PostCardProps {
   post: Post;
 }
 
 export const PostCard: React.FC<PostCardProps> = ({ post }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/posts/${post.id}`);
+  };
+
   return (
-    <Card className="flex w-[300px] flex-col">
+    <Card
+      className="flex w-[300px] flex-col hover:cursor-pointer"
+      onClick={handleClick}
+    >
       <CardHeader>
         <Image
           src={post.thumbnail ? getImageUrl(post.thumbnail) : placeHolderSVG}
@@ -28,14 +39,9 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <CardTitle className="pt-2">{post.title}</CardTitle>
         <CardDescription>{post.description}</CardDescription>
       </CardHeader>
-      <CardFooter className="mt-auto flex items-end justify-between space-x-4">
-        <p>{post.price}</p>
-        <Link
-          className="font-semibold hover:underline"
-          href={`/posts/${post.id}`}
-        >
-          Details
-        </Link>
+      <CardFooter className="mt-auto flex flex-col items-start justify-between">
+        <p className="font-bold">{post.price} zł</p>
+        <p className="text-xs">{formatPostDate(post.createdAt)}</p>
       </CardFooter>
     </Card>
   );
