@@ -17,9 +17,24 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily: {
-        display: ["var(--font-sf)", "system-ui", "sans-serif"],
-        default: ["var(--font-inter)", "system-ui", "sans-serif"],
+      aspectRatio: {
+        "3/2": "3 / 2",
+      },
+      animation: {
+        // Fade up and down
+        "fade-up": "fade-up 0.5s",
+        "fade-down": "fade-down 0.5s",
+        // Tooltip
+        "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,70 +66,64 @@ module.exports = {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      animation: {
+      fontFamily: {
+        display: ["var(--font-sf)", "system-ui", "sans-serif"],
+        default: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      keyframes: {
         // Fade up and down
-        "fade-up": "fade-up 0.5s",
-        "fade-down": "fade-down 0.5s",
+        "fade-up": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(10px)",
+          },
+          "80%": {
+            opacity: 0.6,
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0px)",
+          },
+        },
+        "fade-down": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(-10px)",
+          },
+          "80%": {
+            opacity: 0.6,
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0px)",
+          },
+        },
         // Tooltip
-        "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-        "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "caret-blink": "caret-blink 1.25s ease-out infinite",
-      },
-      aspectRatio: {
-        "3/2": "3 / 2",
-      },
-    },
-    keyframes: {
-      // Fade up and down
-      "fade-up": {
-        "0%": {
-          opacity: 0,
-          transform: "translateY(10px)",
+        "slide-up-fade": {
+          "0%": { opacity: 0, transform: "translateY(6px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
         },
-        "80%": {
-          opacity: 0.6,
+        "slide-down-fade": {
+          "0%": { opacity: 0, transform: "translateY(-6px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
         },
-        "100%": {
-          opacity: 1,
-          transform: "translateY(0px)",
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-      },
-      "fade-down": {
-        "0%": {
-          opacity: 0,
-          transform: "translateY(-10px)",
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        "80%": {
-          opacity: 0.6,
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
         },
-        "100%": {
-          opacity: 1,
-          transform: "translateY(0px)",
-        },
-      },
-      // Tooltip
-      "slide-up-fade": {
-        "0%": { opacity: 0, transform: "translateY(6px)" },
-        "100%": { opacity: 1, transform: "translateY(0)" },
-      },
-      "slide-down-fade": {
-        "0%": { opacity: 0, transform: "translateY(-6px)" },
-        "100%": { opacity: 1, transform: "translateY(0)" },
-      },
-      "accordion-down": {
-        from: { height: "0" },
-        to: { height: "var(--radix-accordion-content-height)" },
-      },
-      "accordion-up": {
-        from: { height: "var(--radix-accordion-content-height)" },
-        to: { height: "0" },
-      },
-      "caret-blink": {
-        "0%,70%,100%": { opacity: "1" },
-        "20%,50%": { opacity: "0" },
       },
     },
   },
