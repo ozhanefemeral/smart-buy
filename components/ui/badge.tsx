@@ -8,7 +8,6 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        // create success variant with green bg and text
         success:
           "border-transparent bg-success text-success-foreground shadow hover:bg-success/80",
         default:
