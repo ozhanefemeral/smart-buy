@@ -25,12 +25,13 @@ export const Notifications = async ({ user }: NotificationsProps) => {
 
   if (noNotifications) {
     return (
-      <div className="rounded-lg bg-gradient-to-b from-white to-blue-100 p-8 text-center">
+      <div className="flex flex-col gap-y-2 rounded-lg bg-gradient-to-t from-white to-blue-100 p-8 text-center">
         <RocketIcon className="mx-auto h-20 w-20" />
-        <h2 className="mt-4 text-xl font-bold">No notifications</h2>
-        <p className="mt-2 text-gray-500">
-          You are all set! Why not post your first ad?
+        <h2 className="mt-2 text-xl font-bold">No notifications</h2>
+        <p className="text-gray-500">
+          You are all set! Post an ad now and earn some 💸
         </p>
+        <CreatePostButton />
       </div>
     );
   }
