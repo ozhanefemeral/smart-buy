@@ -19,9 +19,10 @@ const phone: Post = {
 
 const Template: StoryFn<typeof PostCard> = (args) => <PostCard {...args} />;
 
-export const Available = Template.bind({});
-Available.args = {
+export const Default = Template.bind({});
+Default.args = {
   post: phone,
+  width: 300,
 };
 
 const meta: Meta<typeof PostCard> = {

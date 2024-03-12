@@ -7,9 +7,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 interface PostCardProps {
   post: Post;
+  /**
+   * width of the card in pixels
+   */
+  width?: number;
 }
 
-export const PostCard: React.FC<PostCardProps> = ({ post }) => {
+export const PostCard: React.FC<PostCardProps> = ({ post, width }) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -17,7 +21,12 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
   };
 
   return (
-    <Card className="flex flex-col hover:cursor-pointer" onClick={handleClick}>
+    <Card
+      className={`flex flex-col hover:cursor-pointer ${
+        width ? `w-[${width}px]` : "w-full"
+      }`}
+      onClick={handleClick}
+    >
       <CardHeader>
         <Image
           src={post.thumbnail ? getImageUrl(post.thumbnail) : placeHolderSVG}
