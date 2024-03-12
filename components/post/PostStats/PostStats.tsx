@@ -12,7 +12,7 @@ type PostStatsProps = {
 };
 
 export async function PostStats({ postId }: PostStatsProps) {
-  const post = (await getPostStats(postId)) as PostStats;
+  const post = await getPostStats(postId);
 
   return (
     <Card>

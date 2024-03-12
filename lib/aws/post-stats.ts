@@ -6,7 +6,7 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { dynamoDBClient } from ".";
-import { Post } from "@/components/post";
+import { Post, PostStats } from "@/components/post";
 
 const TableName = "PostStats";
 
@@ -65,7 +65,7 @@ export async function getPostStats(postId: Post["id"]) {
   try {
     const command = new GetItemCommand(params);
     const data = await dynamoDBClient.send(command);
-    return unmarshall(data.Item ?? {});
+    return unmarshall(data.Item ?? {}) as PostStats;
   } catch (error) {
     console.error(
       `Error getting post stats for post ${postId} from DynamoDB:`,
