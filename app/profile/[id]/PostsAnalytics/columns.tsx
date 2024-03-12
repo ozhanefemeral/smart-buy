@@ -43,8 +43,4 @@ export const columns: ColumnDef<PostWithStats>[] = [
     header: "Potential Earnings",
     accessorKey: "price",
   },
-  {
-    header: "",
-    accessorKey: "",
-  },
 ];
