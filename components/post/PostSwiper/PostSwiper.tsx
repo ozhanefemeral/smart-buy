@@ -15,7 +15,7 @@ const maxSlideCount = 4.25;
 export const PostSwiper = ({ posts }: PostSwiperProps) => {
   let { width } = useMediaQuery();
 
-  if (!width) width = 0;
+  if (!width) return null;
   const slidesPerView = width / (300 + 40) + 0.25;
 
   return (
