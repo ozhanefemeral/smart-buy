@@ -20,8 +20,8 @@ export const formatPostDate = (date: Date): string => {
   const sameDay = new Date(date).toDateString() === new Date().toDateString();
 
   if (sameDay) {
-    // and remove the seconds
-    return `Today at ${new Date(date).toLocaleTimeString().slice(0, -3)}`;
+    // returns the time without seconds
+    return `Today at ${new Date(date).toTimeString().slice(0, 5)}`;
   }
 
   return new Date(date).toLocaleDateString("en-US", {
