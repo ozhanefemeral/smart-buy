@@ -28,7 +28,7 @@ export const PostSwiper = ({ posts }: PostSwiperProps) => {
     >
       {posts.map((post, index) => (
         // pb-1 is added to fix the shadows clipping on the bottom
-        <SwiperSlide key={index} className="pb-1">
+        <SwiperSlide key={index} style={{ height: "auto" }} className="pb-1">
           <PostCard post={post} />
         </SwiperSlide>
       ))}

@@ -23,7 +23,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, width }) => {
 
   return (
     <Card
-      className={`flex flex-col hover:cursor-pointer ${
+      className={`flex h-full flex-col hover:cursor-pointer ${
         width ? `w-[${width}px]` : "w-full"
       }`}
       onClick={handleClick}
@@ -39,7 +39,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, width }) => {
           />
         </div>
 
-        <CardTitle className="pt-2">{post.title}</CardTitle>
+        <CardTitle className="line-clamp-2 pt-2">{post.title}</CardTitle>
       </CardHeader>
       <CardFooter className="mt-auto flex justify-between p-4">
         <div className="flex flex-col">
