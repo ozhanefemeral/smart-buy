@@ -7,6 +7,7 @@ import { authOptions } from "@/lib/auth";
 import { getUserWithPosts } from "@/lib/queries/user";
 import { redirect } from "next/navigation";
 import { UserPosts } from "./UserPosts/UserPosts";
+import { PostsAnalytics } from "./PostsAnalytics/PostsAnalytics";
 
 export default async function ProfilePage({
   params,
@@ -32,6 +33,7 @@ export default async function ProfilePage({
         </div>
         <div className="col-span-2">
           {!isSelf && <UserPosts posts={user.owns} />}
+          {isSelf && <PostsAnalytics posts={user.owns} />}
         </div>
       </div>
     </Suspense>
