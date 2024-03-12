@@ -21,6 +21,13 @@ export async function PostsAnalytics({ posts }: PostsTableProps) {
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Your Posts</h1>
       <DataTable columns={columns} data={tableData} />
+      <p className="text-sm">
+        Potential earnings:{" "}
+        <span className="font-bold text-success">
+          {tableData.reduce((acc, post) => acc + post.price, 0)}
+        </span>
+        zł
+      </p>
     </div>
   );
 }
