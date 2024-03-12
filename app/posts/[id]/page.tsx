@@ -38,9 +38,13 @@ export default async function PostPage({ params }: { params: Params }) {
               <p className="max-h-96 overflow-y-auto whitespace-pre-wrap">
                 {post.description}
               </p>
-              <p className="text-right text-sm">
-                Added {formatPostDate(post.createdAt)}
-              </p>
+              <div className="flex justify-between">
+                <p className="text-lg font-bold">{post.price} zł</p>
+
+                <p className="text-right text-sm">
+                  Added {formatPostDate(post.createdAt)}
+                </p>
+              </div>
             </div>
           </div>
         </div>
