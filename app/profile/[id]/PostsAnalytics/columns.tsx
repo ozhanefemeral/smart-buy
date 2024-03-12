@@ -7,7 +7,7 @@ import { formatPostDate } from "@/lib/utils";
 import { Post } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
-interface PostWithStats extends Post, PostStats {}
+export interface PostWithStats extends Post, PostStats {}
 
 export const columns: ColumnDef<PostWithStats>[] = [
   {
@@ -42,5 +42,9 @@ export const columns: ColumnDef<PostWithStats>[] = [
   {
     header: "Potential Earnings",
     accessorKey: "price",
+  },
+  {
+    header: "",
+    accessorKey: "",
   },
 ];

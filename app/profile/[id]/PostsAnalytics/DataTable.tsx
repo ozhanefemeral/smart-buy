@@ -15,16 +15,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { PostWithStats } from "./columns";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+interface DataTableProps {
+  columns: ColumnDef<PostWithStats>[];
+  data: PostWithStats[];
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ columns, data }: DataTableProps) {
   const table = useReactTable({
     data,
     columns,

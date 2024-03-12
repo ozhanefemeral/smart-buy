@@ -1,7 +1,7 @@
 import { getPostStats } from "@/lib/aws";
 import { Post } from "@prisma/client";
 import { DataTable } from "./DataTable";
-import { columns } from "./columns";
+import { PostWithStats, columns } from "./columns";
 
 interface PostsTableProps {
   posts: Post[];
