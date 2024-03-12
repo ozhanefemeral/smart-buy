@@ -25,12 +25,14 @@ export default async function ProfilePage({
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="grid h-fit grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid h-fit grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-x-4">
         <div className="col-span-1">
           {isSelf && <Notifications user={user} />}
           {!isSelf && <PostOwnerInfo id={id} />}
         </div>
-        <div className="col-span-2"></div>
+        <div className="col-span-2">
+          <UserPosts posts={user.owns} />
+        </div>
       </div>
     </Suspense>
   );
