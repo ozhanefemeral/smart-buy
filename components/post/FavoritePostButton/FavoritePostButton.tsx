@@ -26,7 +26,8 @@ export function FavoritePostButton({ postId }: FavoritePostButtonProps) {
     });
   }, [userEmail, postId]);
 
-  const handleClick = async () => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     if (!userEmail) return;
 
     setInProgress(true);
