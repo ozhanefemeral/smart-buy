@@ -31,7 +31,7 @@ export default async function ProfilePage({
           {!isSelf && <PostOwnerInfo id={id} />}
         </div>
         <div className="col-span-2">
-          <UserPosts posts={user.owns} />
+          {!isSelf && <UserPosts posts={user.owns} />}
         </div>
       </div>
     </Suspense>
