@@ -40,7 +40,7 @@ export const columns: ColumnDef<PostWithStats>[] = [
     cell: ({ row }) => formatPostDate(row.original.createdAt),
   },
   {
-    header: "Potential Earnings",
+    header: "Price (zł)",
     accessorKey: "price",
   },
 ];
