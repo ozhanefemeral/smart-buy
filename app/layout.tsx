@@ -6,6 +6,7 @@ import Nav from "@/components/layout/nav";
 import { Suspense } from "react";
 import { Providers } from "@/components/layout/providers";
 import { PageLayout } from "@/components/layout/layout";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Precedent - Building blocks for your Next.js project",
@@ -29,6 +30,7 @@ export default async function RootLayout({
           </Suspense>
           <PageLayout>{children}</PageLayout>
           <Analytics />
+          <SpeedInsights />
         </body>
       </Providers>
     </html>
