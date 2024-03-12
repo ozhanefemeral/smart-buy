@@ -1,4 +1,3 @@
-import { PostStats } from "@/components/post";
 import { getPostStats } from "@/lib/aws";
 import { Post } from "@prisma/client";
 import { DataTable } from "./DataTable";
