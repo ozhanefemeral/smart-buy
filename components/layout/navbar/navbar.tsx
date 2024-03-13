@@ -5,8 +5,8 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import { useSignInModal } from "./sign-in-modal";
-import UserDropdown from "./user-dropdown";
+import { useSignInModal } from "@/components/layout/sign-in-modal";
+import UserDropdown from "@/components/layout/user-dropdown";
 
 export default function NavBar({ user }: { user?: User | null }) {
   const { SignInModal } = useSignInModal();
