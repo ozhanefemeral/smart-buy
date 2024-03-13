@@ -8,12 +8,50 @@ import { getUserWithPosts } from "@/lib/queries/user";
 import { redirect } from "next/navigation";
 import { UserPosts } from "./UserPosts/UserPosts";
 import { PostsAnalytics } from "./PostsAnalytics/PostsAnalytics";
+import { Metadata, ResolvingMetadata } from "next";
 
-export default async function ProfilePage({
-  params,
-}: {
+interface Props {
   params: { id: User["id"] };
-}) {
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const id = params.id;
+
+  const user = await getUserWithPosts(id);
+  if (!user) {
+    return {
+      title: "404 - Not Found",
+    };
+  }
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  const userPostImages = user.owns.map((post) => post.images).flat();
+
+  // https://ui-avatars.com/api/?name=John+Doe is a service that generates avatars
+  // above url will generate a generic image with letters "JD"
+  // use user.name to generate a generic image for users who don't have an image
+  // must split the first and last name
+  // there might be names with more than 2 words, so we only take the letters from first and last name
+  const nameQuery = user.name?.split(" ").slice(0, 2).join("+") || "";
+
+  const mainImage = user.image
+    ? user.image
+    : `https://ui-avatars.com/api/?name=${nameQuery}`;
+
+  return {
+    title: user.name,
+    openGraph: {
+      images: [mainImage, ...userPostImages, ...previousImages],
+    },
+  };
+}
+
+export default async function ProfilePage({ params }: Props) {
   const { id } = params;
 
   const session = await getServerSession(authOptions);

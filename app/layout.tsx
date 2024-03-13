@@ -9,10 +9,8 @@ import { PageLayout } from "@/components/layout/layout";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
-  description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-  metadataBase: new URL("https://precedent.dev"),
+  title: "SmartBuy Market",
+  metadataBase: new URL("https://smartbuy-market.vercel.app/"),
   themeColor: "#FFF",
 };
 

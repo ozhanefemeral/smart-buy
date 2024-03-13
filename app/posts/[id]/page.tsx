@@ -9,12 +9,38 @@ import SharePostCard from "./SharePost";
 import { FavoritePostButton } from "components/post/FavoritePostButton";
 import { redirect } from "next/navigation";
 import { formatPostDate } from "@/lib/utils";
+import { Metadata, ResolvingMetadata } from "next";
 
-type Params = {
-  id: Post["id"];
+type Props = {
+  params: { id: Post["id"] };
 };
 
-export default async function PostPage({ params }: { params: Params }) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const id = params.id;
+
+  const product = await getPostById(id);
+  if (!product) {
+    return {
+      title: "404 - Not Found",
+    };
+  }
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: product.title,
+    description: product.description,
+    openGraph: {
+      images: [...product.images, ...previousImages],
+    },
+  };
+}
+
+export default async function PostPage({ params }: Props) {
   const { id } = params;
   const post = await getPostById(id);
 
