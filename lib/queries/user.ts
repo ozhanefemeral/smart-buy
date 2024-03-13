@@ -97,7 +97,7 @@ export const verifyPhone = async (email: User["email"], otp: string) => {
 
 export const getUserWithPosts = async (
   id: User["id"],
-  session: Session | null,
+  session?: Session | null,
 ) => {
   const user: UserWithPosts | null = await prisma.user.findUnique({
     where: {
