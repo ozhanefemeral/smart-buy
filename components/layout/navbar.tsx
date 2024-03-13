@@ -24,7 +24,8 @@ export default function NavBar({ user }: { user?: User | null }) {
       >
         <div className="mx-5 flex h-16 w-full max-w-screen-xl items-center justify-between">
           <Link href="/" className="flex items-center font-display text-2xl">
-            <p>🛒 Smartbuy</p>
+            <Image src="/logo.svg" width={40} height={40} alt="Smartbuy" />
+            <p>Smartbuy</p>
           </Link>
           <div className="flex items-center justify-end space-x-4">
             <CreatePostButton />
