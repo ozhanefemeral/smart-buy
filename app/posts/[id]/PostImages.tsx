@@ -16,7 +16,7 @@ export const PostImages: React.FC<PostImagesProps> = ({ post }) => {
   const [currentImage, setCurrentImage] = useState(images[0]);
 
   return (
-    <div className="flex max-h-[500px] flex-col border-b pb-4 lg:flex-row lg:space-x-4">
+    <div className="flex max-h-[500px] flex-col border-b pb-6 lg:flex-row lg:space-x-6">
       <div className="flex justify-center lg:w-4/5">
         <div className="h-full overflow-hidden rounded-lg">
           <Image
@@ -29,7 +29,7 @@ export const PostImages: React.FC<PostImagesProps> = ({ post }) => {
           />
         </div>
       </div>
-      <div className="flex flex-col space-y-2 overflow-y-auto pr-4 lg:w-1/5">
+      <div className="flex flex-col space-y-2 overflow-y-auto lg:w-1/5">
         {images.map((image, index) => (
           <div
             key={index}

@@ -14,7 +14,7 @@ export default function useMediaQuery() {
       if (window.matchMedia("(max-width: 640px)").matches) {
         setDevice("mobile");
       } else if (
-        window.matchMedia("(min-width: 641px) and (max-width: 1024px)").matches
+        window.matchMedia("(min-width: 641px) and (max-width: 1023px)").matches
       ) {
         setDevice("tablet");
       } else {
