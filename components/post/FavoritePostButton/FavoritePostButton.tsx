@@ -4,7 +4,7 @@ import {
   getUserFavourites,
 } from "@/components/post/actions";
 import { Button } from "@/components/ui/button";
-import { HeartIcon, HeartOff } from "lucide-react";
+import { HeartIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -57,9 +57,9 @@ export function FavoritePostButton({ postId }: FavoritePostButtonProps) {
       aria-label="Favorite post"
     >
       {isFavorite ? (
-        <HeartOff fill="#ff0000" color="#ff0000" />
+        <HeartIcon fill="#ff0000" color="#f00" />
       ) : (
-        <HeartIcon fill="#ff0000" color="#ff0000" />
+        <HeartIcon color="#f00" />
       )}
     </Button>
   );
