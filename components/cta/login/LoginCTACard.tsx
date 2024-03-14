@@ -26,7 +26,7 @@ export async function LoginCTACard() {
           </p>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="mt-4 flex justify-end">
         <SignInButton />
       </div>
     </div>

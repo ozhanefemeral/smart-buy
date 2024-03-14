@@ -54,6 +54,7 @@ export const PostOwnerInfo: React.FC<Props> = async ({ id }) => {
     <Card>
       <CardHeader className="flex flex-row items-start space-x-4">
         <Image
+          className="overflow-hidden rounded-lg"
           src={postOwner.image || "/avatar.png"}
           alt="Post Owner Avatar"
           width={80}
