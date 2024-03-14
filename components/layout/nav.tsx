@@ -1,7 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/queries/user";
 import { getServerSession } from "next-auth/next";
-import { Navbar } from "./Navbar";
+import { Navbar } from "./navbar";
 
 export default async function Nav() {
   const session = await getServerSession(authOptions);
