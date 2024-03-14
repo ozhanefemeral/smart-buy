@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { UserPosts } from "./UserPosts/UserPosts";
 import { PostsAnalytics } from "./PostsAnalytics/PostsAnalytics";
 import { Metadata, ResolvingMetadata } from "next";
+import { SignOutButton } from "@/components/shared/SignOutButton";
 
 interface Props {
   params: { id: User["id"] };
@@ -72,6 +73,11 @@ export default async function ProfilePage({ params }: Props) {
         <div className="col-span-2">
           {!isSelf && <UserPosts posts={user.owns} />}
           {isSelf && <PostsAnalytics posts={user.owns} />}
+          {isSelf && (
+            <div className="flex justify-end pt-4">
+              <SignOutButton />
+            </div>
+          )}
         </div>
       </div>
     </Suspense>
