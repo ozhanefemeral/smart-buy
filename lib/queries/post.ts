@@ -115,7 +115,7 @@ export const getMostRecentPosts = async () => {
     where: {
       isPublished: true,
     },
-    take: 5,
+    take: 8,
     orderBy: {
       createdAt: "desc",
     },
