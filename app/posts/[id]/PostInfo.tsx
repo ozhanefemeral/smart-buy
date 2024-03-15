@@ -77,7 +77,7 @@ export const MobileInfo: React.FC<PostInfoProps> = ({ post }) => {
 
 export const DesktopInfo: React.FC<PostInfoProps> = ({ post }) => {
   return (
-    <div className="w-2/3">
+    <div className="col-span-2">
       <Card>
         <CardContent className="pt-6">
           <PostImages post={post} />
@@ -104,9 +104,9 @@ export const DesktopInfo: React.FC<PostInfoProps> = ({ post }) => {
 };
 
 export const PostInfo: React.FC<PostInfoProps> = ({ post }) => {
-  const { isDesktop, width } = useMediaQuery();
+  const { isMobile, width } = useMediaQuery();
 
   if (!width) return null;
 
-  return isDesktop ? <DesktopInfo post={post} /> : <MobileInfo post={post} />;
+  return isMobile ? <MobileInfo post={post} /> : <DesktopInfo post={post} />;
 };

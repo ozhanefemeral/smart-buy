@@ -50,9 +50,9 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <Suspense>
-      <div className="flex flex-col space-y-4 lg:flex-row lg:items-start lg:space-x-4 lg:space-y-0 lg:px-4">
+      <div className="flex flex-col gap-y-4 sm:grid sm:grid-cols-3 md:gap-x-4 md:gap-y-0">
         <PostInfo post={post} />
-        <div className="flex h-fit flex-col space-y-4 ">
+        <div className="flex h-fit flex-col gap-y-4 md:col-span-1">
           <PostOwnerInfo id={post.ownerId} />
           <SharePostCard />
           <PostStats postId={id} />

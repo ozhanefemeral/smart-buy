@@ -10,12 +10,14 @@ export default async function CreatePost() {
 
   if (!session?.user?.email) {
     return (
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center gap-y-4">
         <Image src={loginSvg} alt="Login" width={250} />
         <p className="text-center text-gray-500">
           You need to be logged in to create a post
         </p>
-        <SignInButton />
+        <div className="flex justify-center">
+          <SignInButton />
+        </div>
       </div>
     );
   }
