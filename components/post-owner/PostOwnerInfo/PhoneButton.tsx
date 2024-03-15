@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { PhoneIcon } from "lucide-react";
 
 type Props = {
   phone: string;
@@ -11,11 +12,15 @@ export const PhoneButton: React.FC<Props> = ({ phone, isLogged }) => {
     <>
       {isLogged ? (
         <Button className="w-full" asChild>
-          <a href={`tel:${phone}`}>Phone</a>
+          <a href={`tel:${phone}`}>
+            <PhoneIcon className="mr-2 h-4 w-4" />
+            Call
+          </a>
         </Button>
       ) : (
         <Button disabled className="w-full">
-          Phone
+          <PhoneIcon className="mr-2 h-4 w-4" />
+          Call
         </Button>
       )}
     </>
