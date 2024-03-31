@@ -63,6 +63,9 @@ export default async function ProfilePage({ params }: Props) {
     redirect("/404");
   }
 
+  // TODO: seperate all conditional rendering into different components
+  // TODO #2: add CTA to the right if user has no posts & not verified
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="grid h-fit grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-x-4">
