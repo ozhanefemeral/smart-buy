@@ -2,6 +2,8 @@
 
 Smart Buy is an online marketplace built with Next.js, incorporating various technologies to provide a seamless shopping experience. This README serves as a guide to understand the project's tech stack, naming conventions, file structure, and best practices.
 
+[Live preview](smartbuy-market.vercel.app)
+
 ## Tech Stack
 
 - **Next.js 13 with TypeScript**: Next.js provides server-side rendering and a great developer experience, while TypeScript adds static typing for improved code quality.
