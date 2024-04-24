@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { Providers } from "@/components/layout/providers";
 import { PageLayout } from "@/components/layout/layout";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
   title: "SmartBuy Market",
@@ -31,6 +32,7 @@ export default async function RootLayout({
           <SpeedInsights />
         </body>
       </Providers>
+      <GoogleAnalytics gaId="G-XYZ" />
     </html>
   );
 }
