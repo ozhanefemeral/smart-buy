@@ -31,7 +31,13 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" disabled={pending}>
+    <Button
+      type="submit"
+      disabled={pending}
+      onClick={() => {
+        alert("Not today :)");
+      }}
+    >
       {pending ? "Publishing..." : "Publish"}
     </Button>
   );
@@ -53,7 +59,7 @@ export const CreatePostForm: React.FC = () => {
   };
 
   return (
-    <form action={formAction}>
+    <form>
       {hasErrors && (
         <Alert variant="destructive" className="mb-6">
           <AlertTitle>Whooops! 😔</AlertTitle>
